@@ -11,24 +11,24 @@ import org.apache.log4j.Logger;
  * @author massi
  * 
  */
-public class MDDemoniValidate extends Thread {
+public class MDDemoniPublish extends Thread {
 
 	private Logger log = Logger.getLogger(getClass());
-	
-	private boolean testMode = false;
 
+	private boolean testMode = false;
+	
 	/**
 	 * @param target
 	 * @param name
 	 */
-	public MDDemoniValidate(Runnable target, String name) {
+	public MDDemoniPublish(Runnable target, String name) {
 		super(target, name);
 	}
 
 	@Override
 	public void run() {
 		try {
-			log.info("Start Demone per la Validazione");
+			log.info("Start Demone per la Pubblicazione");
 			while (true) {
 				execute();
 				if (testMode){
@@ -50,7 +50,7 @@ public class MDDemoniValidate extends Thread {
 		OggettoDigitaleBusiness odBusiness = null;
 
 		odBusiness = new OggettoDigitaleBusiness();
-		odBusiness.validate(getName(), testMode, log);
+		odBusiness.publish(getName(), testMode, log);
 	}
 
 	/**

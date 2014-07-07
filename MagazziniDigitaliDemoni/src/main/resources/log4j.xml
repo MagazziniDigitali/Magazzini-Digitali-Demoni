@@ -34,7 +34,13 @@
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="STDERR"/>
   </category>
-  
+
+  <category name="it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.solr">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
   <category name="mx.randalf.xsd.WriteXsd">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>
@@ -42,6 +48,30 @@
   </category>
   
   <category name="mx.randalf.archive.Tar">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+  
+  <category name="mx.randalf.xsd.ReadXsd">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.apache">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="mx.randalf">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="it.bncf.magazziniDigitali.solr">
     <level value="ERROR"/>
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="STDERR"/>
