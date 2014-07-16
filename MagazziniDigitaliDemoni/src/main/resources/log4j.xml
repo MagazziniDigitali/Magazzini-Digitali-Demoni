@@ -29,6 +29,18 @@
     <appender-ref ref="STDERR"/>
   </category>
   
+  <category name="it.bncf.magazziniDigitali.demoni.MDDemoni">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+  
+  <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniPublish">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+    
   <category name="it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitaleBusiness">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>

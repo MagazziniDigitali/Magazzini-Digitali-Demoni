@@ -4,6 +4,8 @@
 package it.bncf.magazziniDigitali.demoni.thread;
 
 import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitaleBusiness;
+import mx.randalf.configuration.Configuration;
+import mx.randalf.configuration.exception.ConfigurationException;
 
 import org.apache.log4j.Logger;
 
@@ -34,9 +36,13 @@ public class MDDemoniPublish extends Thread {
 				if (testMode){
 					break;
 				}
-				Thread.sleep(10000);
+				Thread.sleep(Long.parseLong(Configuration.getValue("demoni.Publish.timeOut")));
 			}
 			log.info("Stop Demone per la Validazione");
+		} catch (NumberFormatException e) {
+			log.error(e.getMessage(), e);
+		} catch (ConfigurationException e) {
+			log.error(e.getMessage(), e);
 		} catch (InterruptedException e) {
 			log.error(e.getMessage(), e);
 		}
