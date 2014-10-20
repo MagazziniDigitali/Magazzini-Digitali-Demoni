@@ -23,6 +23,12 @@
     </filter> 
   </appender>
   
+  <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniCoda">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+  
   <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniValidate">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>
@@ -84,6 +90,18 @@
   </category>
 
   <category name="it.bncf.magazziniDigitali.solr">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+  
+  <category name="org.hibernate">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+  
+  <category name="org.jboss">
     <level value="ERROR"/>
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="STDERR"/>

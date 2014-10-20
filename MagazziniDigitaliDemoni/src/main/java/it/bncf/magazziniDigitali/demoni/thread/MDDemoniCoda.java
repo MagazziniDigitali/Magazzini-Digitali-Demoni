@@ -4,41 +4,45 @@
 package it.bncf.magazziniDigitali.demoni.thread;
 
 import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitaleBusiness;
-import mx.randalf.configuration.Configuration;
-import mx.randalf.configuration.exception.ConfigurationException;
 
 import org.apache.log4j.Logger;
 
+import mx.randalf.configuration.Configuration;
+import mx.randalf.configuration.exception.ConfigurationException;
+
 /**
  * @author massi
- * 
+ *
  */
-public class MDDemoniPublish extends Thread {
+public class MDDemoniCoda extends Thread {
 
 	private Logger log = Logger.getLogger(getClass());
 
 	private boolean testMode = false;
-	
+
 	/**
 	 * @param target
 	 * @param name
 	 */
-	public MDDemoniPublish(Runnable target, String name) {
+	public MDDemoniCoda(Runnable target, String name) {
 		super(target, name);
 	}
 
+	/**
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		try {
-			log.info("Start Demone per la Pubblicazione");
+			log.info("Start Demone per la Generazione del file Coda");
 			while (true) {
 				execute();
 				if (testMode){
 					break;
 				}
-				Thread.sleep(Long.parseLong(Configuration.getValue("demoni.Publish.timeOut")));
+				Thread.sleep(Long.parseLong(Configuration.getValue("demoni.Coda.timeOut")));
 			}
-			log.info("Stop Demone per la Pubblicazione");
+			log.info("Stop Demone per la Generazione del file Coda");
 		} catch (NumberFormatException e) {
 			log.error(e.getMessage(), e);
 		} catch (ConfigurationException e) {
@@ -56,7 +60,7 @@ public class MDDemoniPublish extends Thread {
 		OggettoDigitaleBusiness odBusiness = null;
 
 		odBusiness = new OggettoDigitaleBusiness(null);
-		odBusiness.publish(getName(), testMode, log);
+		odBusiness.coda(getName(), testMode, log);
 	}
 
 	/**
@@ -65,4 +69,5 @@ public class MDDemoniPublish extends Thread {
 	public void setTestMode(boolean testMode) {
 		this.testMode = testMode;
 	}
+
 }

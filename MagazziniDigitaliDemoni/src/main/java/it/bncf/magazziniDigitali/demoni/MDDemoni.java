@@ -4,6 +4,7 @@
 package it.bncf.magazziniDigitali.demoni;
 
 import it.bncf.magazziniDigitali.demoni.exception.MDDemoniException;
+import it.bncf.magazziniDigitali.demoni.thread.MDDemoniCoda;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniPublish;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniValidate;
 
@@ -19,6 +20,8 @@ import mx.randalf.configuration.exception.ConfigurationException;
 public class MDDemoni {
 
 	private static Logger log = Logger.getLogger(MDDemoni.class);
+
+	private MDDemoniCoda coda = null;
 
 	private MDDemoniValidate validate = null;
 
@@ -37,20 +40,21 @@ public class MDDemoni {
 		MDDemoni demoni = null;
 		
 		try {
-			if (args.length>=1){
+			if (args.length>=2){
 				demoni = new MDDemoni();
-				demoni.start(args[0],(args.length>1?args[1]:null));
+				demoni.start(args[0],args[1],(args.length>2?args[2]:null));
 			} else {
 				System.out.println("Per eseguire questo programma sono necessari i seguenti parametri:");
 				System.out.println("1) Path dei file di properties");
-				System.out.println("2) --test (Opzionale) per eseguire l'applicazione in modalità Test");
+				System.out.println("2) Indicare il tipo di Operazione (Validate, Publish) ");
+				System.out.println("3) --test (Opzionale) per eseguire l'applicazione in modalità Test");
 			}
 		} catch (MDDemoniException e) {
 			log.error(e.getMessage(), e);
 		}
 	}
 
-	public void start(String pathProperties, String testMode) throws MDDemoniException{
+	public void start(String pathProperties, String Operation, String testMode) throws MDDemoniException{
 		
 		try {
 			log.info("Start Demoni");
@@ -59,26 +63,43 @@ public class MDDemoni {
 			}
 			
 			Configuration.init(pathProperties);
-			
-			if (Configuration.getValue("demoni.Validate") != null &&
-					Configuration.getValue("demoni.Validate").equalsIgnoreCase("true")){
-				validate = new MDDemoniValidate(Thread.currentThread(), "Validate");
-				if (testMode != null && testMode.equals("--test")){
-					validate.setTestMode(true);
-					validate.run();
-				} else {
-					validate.start();
+
+			if (Operation.equalsIgnoreCase("Validate")){
+				if (Configuration.getValue("demoni.Validate") != null &&
+						Configuration.getValue("demoni.Validate").equalsIgnoreCase("true")){
+					validate = new MDDemoniValidate(Thread.currentThread(), "Validate");
+					if (testMode != null && testMode.equals("--test")){
+						validate.setTestMode(true);
+						validate.run();
+					} else {
+						validate.start();
+					}
 				}
 			}
 			
-			if (Configuration.getValue("demoni.Publish") != null &&
-					Configuration.getValue("demoni.Publish").equalsIgnoreCase("true")){
-				publish = new MDDemoniPublish(Thread.currentThread(), "Publish");
-				if (testMode != null && testMode.equals("--test")){
-					publish.setTestMode(true);
-					publish.run();
-				} else {
-					publish.start();
+			if (Operation.equalsIgnoreCase("Publish")){
+				if (Configuration.getValue("demoni.Publish") != null &&
+						Configuration.getValue("demoni.Publish").equalsIgnoreCase("true")){
+					publish = new MDDemoniPublish(Thread.currentThread(), "Publish");
+					if (testMode != null && testMode.equals("--test")){
+						publish.setTestMode(true);
+						publish.run();
+					} else {
+						publish.start();
+					}
+				}
+			}
+
+			if (Operation.equalsIgnoreCase("Coda")){
+				if (Configuration.getValue("demoni.Coda") != null &&
+						Configuration.getValue("demoni.Coda").equalsIgnoreCase("true")){
+					coda = new MDDemoniCoda(Thread.currentThread(), "Coda");
+					if (testMode != null && testMode.equals("--test")){
+						coda.setTestMode(true);
+						coda.run();
+					} else {
+						coda.start();
+					}
 				}
 			}
 			
@@ -89,7 +110,9 @@ public class MDDemoni {
 					if ((validate != null &&
 							validate.isAlive()) ||
 						(publish != null &&
-							publish.isAlive())){
+							publish.isAlive()) ||
+						(coda != null &&
+							coda.isAlive())){
 						Thread.sleep(10000);
 					} else {
 						break;

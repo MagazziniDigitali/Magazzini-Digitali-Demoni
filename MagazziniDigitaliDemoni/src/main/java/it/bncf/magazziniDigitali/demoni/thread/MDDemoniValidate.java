@@ -55,7 +55,7 @@ public class MDDemoniValidate extends Thread {
 	private void execute() {
 		OggettoDigitaleBusiness odBusiness = null;
 
-		odBusiness = new OggettoDigitaleBusiness();
+		odBusiness = new OggettoDigitaleBusiness(null);
 		odBusiness.validate(getName(), testMode, log);
 	}
 
