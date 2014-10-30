@@ -5,7 +5,9 @@ package it.bncf.magazziniDigitali.demoni;
 
 import it.bncf.magazziniDigitali.demoni.exception.MDDemoniException;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniCoda;
+import it.bncf.magazziniDigitali.demoni.thread.MDDemoniGeoReplica;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniPublish;
+import it.bncf.magazziniDigitali.demoni.thread.MDDemoniThred;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniValidate;
 
 import org.apache.log4j.Logger;
@@ -21,11 +23,12 @@ public class MDDemoni {
 
 	private static Logger log = Logger.getLogger(MDDemoni.class);
 
-	private MDDemoniCoda coda = null;
-
-	private MDDemoniValidate validate = null;
-
-	private MDDemoniPublish publish = null;
+	private MDDemoniThred process = null;
+//	private MDDemoniCoda coda = null;
+//
+//	private MDDemoniValidate validate = null;
+//
+//	private MDDemoniPublish publish = null;
 	
 	/**
 	 * 
@@ -64,6 +67,25 @@ public class MDDemoni {
 			
 			Configuration.init(pathProperties);
 
+			if (Configuration.getValue("demoni."+Operation) != null &&
+				Configuration.getValue("demoni."+Operation).equalsIgnoreCase("true")){
+				if (Operation.equalsIgnoreCase("Validate")){
+					process = new MDDemoniValidate(Thread.currentThread(), Operation);
+				}else if (Operation.equalsIgnoreCase("Publish")){
+					process = new MDDemoniPublish(Thread.currentThread(), Operation);
+				}else if (Operation.equalsIgnoreCase("Coda")){
+					process = new MDDemoniCoda(Thread.currentThread(), Operation);
+				}else if (Operation.equalsIgnoreCase("GeoReplica")){
+					process = new MDDemoniGeoReplica(Thread.currentThread(), Operation);
+				}
+				if (testMode != null && testMode.equals("--test")){
+					process.setTestMode(true);
+					process.run();
+				} else {
+					process.start();
+				}
+			}
+/*			
 			if (Operation.equalsIgnoreCase("Validate")){
 				if (Configuration.getValue("demoni.Validate") != null &&
 						Configuration.getValue("demoni.Validate").equalsIgnoreCase("true")){
@@ -102,11 +124,18 @@ public class MDDemoni {
 					}
 				}
 			}
-			
+			*/
 			if (testMode != null && testMode.equals("--test")){
 				System.out.println("Fine Test");
 			} else {
 				while (true){
+					if (process != null &&
+						process.isAlive()) {
+						Thread.sleep(10000);
+					} else {
+						break;
+					}
+					/*
 					if ((validate != null &&
 							validate.isAlive()) ||
 						(publish != null &&
@@ -117,6 +146,7 @@ public class MDDemoni {
 					} else {
 						break;
 					}
+					*/
 				}
 			}
 			log.info("Stop Demoni");

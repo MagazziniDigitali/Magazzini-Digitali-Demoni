@@ -3,9 +3,7 @@
  */
 package it.bncf.magazziniDigitali.demoni.thread;
 
-import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitaleBusiness;
-import mx.randalf.configuration.Configuration;
-import mx.randalf.configuration.exception.ConfigurationException;
+import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitalePublishBusiness;
 
 import org.apache.log4j.Logger;
 
@@ -13,11 +11,9 @@ import org.apache.log4j.Logger;
  * @author massi
  * 
  */
-public class MDDemoniPublish extends Thread {
+public class MDDemoniPublish extends MDDemoniThred {
 
-	private Logger log = Logger.getLogger(getClass());
-
-	private boolean testMode = false;
+	private Logger log = Logger.getLogger(MDDemoniPublish.class);
 	
 	/**
 	 * @param target
@@ -27,42 +23,14 @@ public class MDDemoniPublish extends Thread {
 		super(target, name);
 	}
 
-	@Override
-	public void run() {
-		try {
-			log.info("Start Demone per la Pubblicazione");
-			while (true) {
-				execute();
-				if (testMode){
-					break;
-				}
-				Thread.sleep(Long.parseLong(Configuration.getValue("demoni.Publish.timeOut")));
-			}
-			log.info("Stop Demone per la Pubblicazione");
-		} catch (NumberFormatException e) {
-			log.error(e.getMessage(), e);
-		} catch (ConfigurationException e) {
-			log.error(e.getMessage(), e);
-		} catch (InterruptedException e) {
-			log.error(e.getMessage(), e);
-		}
-	}
-
 	/**
 	 * Metodo utilizzato per l'esecuzione dell'attività di validazione
 	 * 
 	 */
-	private void execute() {
-		OggettoDigitaleBusiness odBusiness = null;
+	protected void execute() {
+		OggettoDigitalePublishBusiness odBusiness = null;
 
-		odBusiness = new OggettoDigitaleBusiness(null);
+		odBusiness = new OggettoDigitalePublishBusiness(null);
 		odBusiness.publish(getName(), testMode, log);
-	}
-
-	/**
-	 * @param testMode the testMode to set
-	 */
-	public void setTestMode(boolean testMode) {
-		this.testMode = testMode;
 	}
 }
