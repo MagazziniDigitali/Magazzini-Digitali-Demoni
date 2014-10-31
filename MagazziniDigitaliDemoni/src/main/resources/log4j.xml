@@ -34,7 +34,13 @@
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="STDERR"/>
   </category>
-  
+
+  <category name="it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitaleGeoReplica">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
   <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniCoda">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>
