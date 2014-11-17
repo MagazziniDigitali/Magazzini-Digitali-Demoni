@@ -6,9 +6,9 @@
 <hibernate-configuration>
 <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://dbservertest.bncf.lan:3306/MagazziniDigitaliNew?autoReconnect=true</property>
-  <property name="hibernate.connection.username">root</property>
-  <property name="hibernate.connection.password">8ncf-adm1n</property>
+  <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/MagazziniDigitali?autoReconnect=true</property>
+  <property name="hibernate.connection.username">MD</property>
+  <property name="hibernate.connection.password">Magazzini</property>
   <property name="connection.autoReconnect">true</property>
   <property name="connection.autoReconnectForPools">true</property>
   <property name="connection.is-connection-validation-required">true</property>
