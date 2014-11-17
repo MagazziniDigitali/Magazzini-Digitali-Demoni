@@ -52,7 +52,19 @@
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="STDERR"/>
   </category>
-  
+
+  <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniSolrIndex">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitaleSolrIndex">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
   <category name="it.bncf.magazziniDigitali.demoni.MDDemoni">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>

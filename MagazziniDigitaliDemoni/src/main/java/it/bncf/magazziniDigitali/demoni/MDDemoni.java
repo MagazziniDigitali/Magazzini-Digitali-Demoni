@@ -7,6 +7,7 @@ import it.bncf.magazziniDigitali.demoni.exception.MDDemoniException;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniCoda;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniGeoReplica;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniPublish;
+import it.bncf.magazziniDigitali.demoni.thread.MDDemoniSolrIndex;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniThred;
 import it.bncf.magazziniDigitali.demoni.thread.MDDemoniValidate;
 
@@ -77,6 +78,8 @@ public class MDDemoni {
 					process = new MDDemoniCoda(Thread.currentThread(), Operation);
 				}else if (Operation.equalsIgnoreCase("GeoReplica")){
 					process = new MDDemoniGeoReplica(Thread.currentThread(), Operation);
+				}else if (Operation.equalsIgnoreCase("SolrIndex")){
+					process = new MDDemoniSolrIndex(Thread.currentThread(), Operation);
 				}
 				if (testMode != null && testMode.equals("--test")){
 					process.setTestMode(true);
