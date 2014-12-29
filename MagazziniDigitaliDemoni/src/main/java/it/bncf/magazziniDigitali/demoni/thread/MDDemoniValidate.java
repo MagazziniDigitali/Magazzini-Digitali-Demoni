@@ -20,7 +20,7 @@ public class MDDemoniValidate extends MDDemoniThred {
 	 * @param name
 	 */
 	public MDDemoniValidate(Runnable target, String name) {
-		super(target, name);
+		super(target, name,true);
 	}
 
 	/**

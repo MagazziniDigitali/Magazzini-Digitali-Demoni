@@ -20,7 +20,7 @@ public class MDDemoniCoda extends MDDemoniThred {
 	 * @param name
 	 */
 	public MDDemoniCoda(Runnable target, String name) {
-		super(target, name);
+		super(target, name,false);
 	}
 
 	/**

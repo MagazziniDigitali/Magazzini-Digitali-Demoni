@@ -20,7 +20,7 @@ public class MDDemoniPublish extends MDDemoniThred {
 	 * @param name
 	 */
 	public MDDemoniPublish(Runnable target, String name) {
-		super(target, name);
+		super(target, name,true);
 	}
 
 	/**

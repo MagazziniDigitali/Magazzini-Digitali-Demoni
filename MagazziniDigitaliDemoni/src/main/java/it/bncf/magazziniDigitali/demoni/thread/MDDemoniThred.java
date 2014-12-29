@@ -18,12 +18,17 @@ public abstract class MDDemoniThred extends Thread {
 
 	protected boolean testMode = false;
 
+	private boolean running = true;
+
+	private boolean repeater = false;
+	
 	/**
 	 * @param target
 	 * @param name
 	 */
-	public MDDemoniThred(Runnable target, String name) {
+	public MDDemoniThred(Runnable target, String name, boolean repeater) {
 		super(target, name);
+		this.repeater = repeater;
 	}
 
 	/**
@@ -32,15 +37,19 @@ public abstract class MDDemoniThred extends Thread {
 	@Override
 	public void run() {
 		try {
-			log.info("Start Demone per la Generazione del file Coda");
-			while (true) {
+			log.info("Start Demone ["+getName()+"]");
+			while (running) {
 				execute();
-				if (testMode){
+				if (testMode|| ! repeater || !running){
 					break;
 				}
-				Thread.sleep(Long.parseLong(Configuration.getValue("demoni.Coda.timeOut")));
+				if (Configuration.getValue("demoni."+getName()+".timeOut")==null){
+					Thread.sleep(10000);
+				} else {
+					Thread.sleep(Long.parseLong(Configuration.getValue("demoni."+getName()+".timeOut")));
+				}
 			}
-			log.info("Stop Demone per la Generazione del file Coda");
+			log.info("Stop Demone ["+getName()+"]");
 		} catch (NumberFormatException e) {
 			log.error(e.getMessage(), e);
 		} catch (ConfigurationException e) {
@@ -61,6 +70,13 @@ public abstract class MDDemoniThred extends Thread {
 	 */
 	public void setTestMode(boolean testMode) {
 		this.testMode = testMode;
+	}
+
+	/**
+	 * @param running the running to set
+	 */
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 
 }

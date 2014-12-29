@@ -23,6 +23,12 @@
     </filter> 
   </appender>
   
+  <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniController$ExecuteProcer">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
   <category name="it.bncf.magazziniDigitali.demoni.thread.MDDemoniThred">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>
@@ -34,7 +40,13 @@
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="STDERR"/>
   </category>
-
+  
+  <category name="it.bncf.magazziniDigitali.demoni.thread.GeoReplicaProces">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+  
   <category name="it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitaleGeoReplica">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>

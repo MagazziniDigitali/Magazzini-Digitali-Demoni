@@ -3,7 +3,10 @@
  */
 package it.bncf.magazziniDigitali.demoni.thread;
 
-import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitaleGeoReplicaBusiness;
+import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitaleGeoReplica;
+import it.bncf.magazziniDigitali.demoni.exception.MDDemoniException;
+
+import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
@@ -11,26 +14,33 @@ import org.apache.log4j.Logger;
  * @author massi
  * 
  */
-public class MDDemoniGeoReplica extends MDDemoniThred {
+public class MDDemoniGeoReplica {
 
-	private Logger log = Logger.getLogger(getClass());
+	private Logger log = Logger.getLogger(MDDemoniGeoReplica.class);
 	
 	/**
 	 * @param target
 	 * @param name
 	 */
-	public MDDemoniGeoReplica(Runnable target, String name) {
-		super(target, name);
+	public MDDemoniGeoReplica() {
 	}
 
 	/**
 	 * Metodo utilizzato per l'esecuzione dell'attività di validazione
+	 * @throws MDDemoniException 
 	 * 
 	 */
-	protected void execute() {
-		OggettoDigitaleGeoReplicaBusiness odBusiness = null;
+	public void execute(Vector<String> params, String application) 
+			throws MDDemoniException {
+		OggettoDigitaleGeoReplica odgr = null;
 
-		odBusiness = new OggettoDigitaleGeoReplicaBusiness(null);
-		odBusiness.esegui(getName(), testMode, log);
+		log.debug("Eseguo la Geo replica ");
+
+		if (params != null && params.size()==1){
+			odgr = new OggettoDigitaleGeoReplica(null, log,"GeoReplica");
+			odgr.esegui(params.get(0), application);
+		} else {
+			throw new MDDemoniException("[GeoReplica] Numero parametri non corretti");
+		}
 	}
 }
