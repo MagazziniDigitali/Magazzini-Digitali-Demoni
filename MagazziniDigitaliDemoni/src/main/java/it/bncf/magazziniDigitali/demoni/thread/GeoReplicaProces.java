@@ -169,7 +169,6 @@ public class GeoReplicaProces extends Thread {
 				if (Configuration.getValue("demoni.GeoReplica.numberThread") != null){
 					numThread = Integer.valueOf(Configuration.getValue("demoni.GeoReplica.numberThread"));
 				}
-				System.out.println("numThread: "+numThread);
 				while(true){
 					conta =0;
 					keys =lProcess.keys();
@@ -188,21 +187,16 @@ public class GeoReplicaProces extends Thread {
 						if (conta==0){
 							break;
 						} else {
-							System.out.println("Rimango in attesa");
 							Thread.sleep(5000);
 						}
 					} else {
-						System.out.println("conta: "+conta);
 						if (conta<numThread){
-							System.out.println("Esco ");
 							break;
 						} else {
-							System.out.println("Rimango in attesa");
 							Thread.sleep(5000);
 						}
 					}
 				}
-				System.out.println("Ci sono posti disponibili per i processi");
 			}
 		} catch (NumberFormatException e) {
 			throw e;
@@ -264,7 +258,7 @@ public class GeoReplicaProces extends Thread {
 			command=new Vector<String>();
 			command.add("GeoReplica");
 			command.add(objectIdentifierPremis);
-			executeProc = new ExecuteProcer(command, "GeoReplica", fileConf);
+			executeProc = new ExecuteProcer(command, "GeoReplica", objectIdentifierPremis, fileConf);
 			executeProc.start();
 			lProcess.put(objectIdentifierPremis, executeProc);
 		} catch (IOException e) {

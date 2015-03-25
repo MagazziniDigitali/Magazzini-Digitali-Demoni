@@ -49,6 +49,7 @@ public abstract class MDDemoniThred extends Thread {
 					Thread.sleep(Long.parseLong(Configuration.getValue("demoni."+getName()+".timeOut")));
 				}
 			}
+			finalize();
 			log.info("Stop Demone ["+getName()+"]");
 		} catch (NumberFormatException e) {
 			log.error(e.getMessage(), e);
@@ -58,6 +59,12 @@ public abstract class MDDemoniThred extends Thread {
 			log.error(e.getMessage(), e);
 		}
 	}
+
+	/**
+	 * Metodo utilizzato per l'esecuzione dell'attività finali
+	 * 
+	 */
+	protected abstract void finalize();
 
 	/**
 	 * Metodo utilizzato per l'esecuzione dell'attività di validazione

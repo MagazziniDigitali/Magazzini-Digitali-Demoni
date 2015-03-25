@@ -23,13 +23,14 @@ class ExecuteProcer extends Thread {
     private Process process;
     private Integer exit;
     private String name;
+    private String id;
     private GregorianCalendar dStart;
     private GregorianCalendar dStop;
     private boolean esito = false;
 
     private Logger log = Logger.getLogger(ExecuteProcer.class);
 
-	public ExecuteProcer(Vector<String> command, String name, String fileConf) throws IOException, ConfigurationException {
+	public ExecuteProcer(Vector<String> command, String name, String id, String fileConf) throws IOException, ConfigurationException {
     	File dir = null;
     	String[] comm = null;
     	Vector<String> commands = null;
@@ -45,11 +46,12 @@ class ExecuteProcer extends Thread {
 			commands.addAll(command);
 			this.process = Runtime.getRuntime().exec(commands.toArray(new String[commands.size()]), null, dir);
 			this.name = name;
+			this.id = id;
 		} catch (IOException e) {
-			log.error(name+" "+e.getMessage(),e);
+			log.error("Name: "+name+"\tId: "+id+"\n"+e.getMessage(),e);
 			throw e;
 		} catch (ConfigurationException e) {
-			log.error(name+" "+e.getMessage(),e);
+			log.error("Name: "+name+"\tId: "+id+"\n"+e.getMessage(),e);
 			throw e;
 		}
     }
@@ -58,6 +60,8 @@ class ExecuteProcer extends Thread {
     	BufferedReader errReader  = null;
     	BufferedReader inputReader = null;
     	String val = null;
+    	String input = "";
+    	String error = "";
 
     	try {
         	errReader = new BufferedReader(new InputStreamReader(
@@ -67,20 +71,30 @@ class ExecuteProcer extends Thread {
             		process.getInputStream()));
 
 			while ((val = inputReader.readLine()) != null) {
-				log.debug(name+" "+val);
+				input += (input.equals("")?"Name: "+name+"\tId: "+id+"\n":"\n")+val;
+			}
+			if (!input.equals("")){
+				log.debug(input);
 			}
 
 			while ((val = errReader.readLine()) != null) {
-				log.error(name+" "+val);
+				if (!val.trim().startsWith("Warning:") &&
+						!val.trim().startsWith("Avvertenze del compilatore:") &&
+						!val.trim().startsWith("WARNING:")){
+					error += (error.equals("")?"Name: "+name+"\tId: "+id+"\n":"\n")+val;
+				}
+			}
+			if (!error.equals("")){
+				log.error(error);
 			}
 
             exit = process.waitFor();
             
             if (exit==0){
             	esito=true;
-            	log.debug(name+" "+"Esito positivo");
+            	log.debug("Name: "+name+"\tId: "+id+"\n"+"Esito positivo");
             } else {
-            	log.error(name+" "+"Esito Negattivo ["+exit+"]");
+            	log.error("Name: "+name+"\tId: "+id+"\n"+"Esito Negattivo ["+exit+"]");
             }
             dStop = new GregorianCalendar();
         } catch (InterruptedException ignore) {

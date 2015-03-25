@@ -42,7 +42,6 @@ class SocketServer extends Thread {
 //				    new PrintWriter(clientSocket.getOutputStream(), true);
 				in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 				line = in.readLine();
-				System.out.println("TESTO: "+line);
 				
 				if (in != null){
 					in.close();
@@ -56,7 +55,6 @@ class SocketServer extends Thread {
 					break;
 				}
 			}
-			System.out.println("USCITO");
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		} finally {

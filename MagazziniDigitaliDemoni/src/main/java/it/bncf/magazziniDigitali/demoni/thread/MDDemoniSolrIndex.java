@@ -38,7 +38,7 @@ public class MDDemoniSolrIndex {
 			odSolrIndex = new OggettoDigitaleSolrIndex(null, log, "SolrIndex");
 			odSolrIndex.esegui(params.get(0), application);
 		} else {
-			throw new MDDemoniException("[SolrIndex] Numero parametri non corretti");
+			throw new MDDemoniException("[SolrIndex] ["+params.get(0)+"] Numero parametri non corretti");
 		}
 	}
 

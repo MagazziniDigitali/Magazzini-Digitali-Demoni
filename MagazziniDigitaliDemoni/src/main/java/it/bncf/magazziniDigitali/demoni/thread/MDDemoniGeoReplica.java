@@ -40,7 +40,7 @@ public class MDDemoniGeoReplica {
 			odgr = new OggettoDigitaleGeoReplica(null, log,"GeoReplica");
 			odgr.esegui(params.get(0), application);
 		} else {
-			throw new MDDemoniException("[GeoReplica] Numero parametri non corretti");
+			throw new MDDemoniException("[GeoReplica] ["+params.get(0)+"]Numero parametri non corretti");
 		}
 	}
 }

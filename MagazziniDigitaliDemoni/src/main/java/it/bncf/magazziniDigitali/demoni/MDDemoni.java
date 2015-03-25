@@ -124,7 +124,15 @@ public class MDDemoni {
 				if (available(portSocket) && ! testMode.equals("--test")){
 					throw new SocketException("Il controller non risulta attivo");
 				}
-				if (operation.equalsIgnoreCase("GeoReplica")){
+				if (operation.equalsIgnoreCase("Validate")){
+					if (!startValidate(params, operation)){
+						throw new SocketException("Riscontrato un problema nella Validate");
+					}
+				} else if (operation.equalsIgnoreCase("Publish")){
+					if (!startPublish(params, operation)){
+						throw new SocketException("Riscontrato un problema nella Publish");
+					}
+				} else if (operation.equalsIgnoreCase("GeoReplica")){
 					if (!startGeoReplica(params, operation)){
 						throw new SocketException("Riscontrato un problema nella GeoRepplica");
 					}
@@ -135,11 +143,7 @@ public class MDDemoni {
 				} else {
 					if (Configuration.getValue("demoni."+operation) != null &&
 						Configuration.getValue("demoni."+operation).equalsIgnoreCase("true")){
-						if (operation.equalsIgnoreCase("Validate")){
-							process = new MDDemoniValidate(Thread.currentThread(), operation);
-						}else if (operation.equalsIgnoreCase("Publish")){
-							process = new MDDemoniPublish(Thread.currentThread(), operation);
-						}else if (operation.equalsIgnoreCase("Coda")){
+						if (operation.equalsIgnoreCase("Coda")){
 							process =new MDDemoniCoda(Thread.currentThread(), operation);
 						}
 						if (testMode != null && testMode.equals("--test")){
@@ -189,6 +193,48 @@ public class MDDemoni {
 				esito = true;
 				mdSolrIndex = new MDDemoniSolrIndex();
 				mdSolrIndex.execute(params, operation);
+				
+			}
+		} catch (ConfigurationException e) {
+			throw e;
+		} catch (MDDemoniException e) {
+			throw e;
+		}
+		return esito;
+	}
+
+	private boolean startValidate(Vector<String> params, String operation) 
+			throws ConfigurationException, MDDemoniException{
+		MDDemoniValidate mdValidate = null;
+		boolean esito = false;
+		try {
+			if (operation.equals("Validate") &&
+					Configuration.getValue("demoni."+operation) != null &&
+					Configuration.getValue("demoni."+operation).equalsIgnoreCase("true")){
+				esito = true;
+				mdValidate = new MDDemoniValidate();
+				mdValidate.execute(params, operation);
+				
+			}
+		} catch (ConfigurationException e) {
+			throw e;
+		} catch (MDDemoniException e) {
+			throw e;
+		}
+		return esito;
+	}
+
+	private boolean startPublish(Vector<String> params, String operation) 
+			throws ConfigurationException, MDDemoniException{
+		MDDemoniPublish mdPublish = null;
+		boolean esito = false;
+		try {
+			if (operation.equals("Publish") &&
+					Configuration.getValue("demoni."+operation) != null &&
+					Configuration.getValue("demoni."+operation).equalsIgnoreCase("true")){
+				esito = true;
+				mdPublish = new MDDemoniPublish();
+				mdPublish.execute(params, operation);
 				
 			}
 		} catch (ConfigurationException e) {

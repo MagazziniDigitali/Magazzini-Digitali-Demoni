@@ -34,4 +34,8 @@ public class MDDemoniCoda extends MDDemoniThred {
 		odBusiness.coda(getName(), testMode, log);
 	}
 
+	@Override
+	protected void finalize() {
+	}
+
 }

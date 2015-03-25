@@ -91,6 +91,31 @@ public class MDDemoniController extends MDDemoniThred {
 		}
 	}
 
+	@Override
+	protected void finalize() {
+		Enumeration<String> keys = null;
+		String key = null;
+		if (lProcess != null){
+			keys = lProcess.keys();
+			while(keys.hasMoreElements()){
+				try {
+					key = keys.nextElement();
+					checkProces(key, true);
+				} catch (NumberFormatException e) {
+					log.error(e.getMessage(), e);
+				} catch (HibernateException e) {
+					log.error(e.getMessage(), e);
+				} catch (ConfigurationException e) {
+					log.error(e.getMessage(), e);
+				} catch (InterruptedException e) {
+					log.error(e.getMessage(), e);
+				} catch (NamingException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		}
+	}
+
 	/**
 	 * @see it.bncf.magazziniDigitali.demoni.thread.MDDemoniThred#execute()
 	 */
@@ -104,26 +129,26 @@ public class MDDemoniController extends MDDemoniThred {
 		GregorianCalendar gc = null;
 		Vector<String> command = null;
 		MDFilesTmp mdFileTmp = null;
-		Enumeration<String> keys = null;
-		String key = null;
-
+		String application = null;
+		String id = null;
+		
 		try {
 			log.info("Inizio esecuzione processo per il Controller");
 			odb = new OggettoDigitaleBusiness(null);
 			mdStatoDAO = new MDStatoDAO(null);
 			if (validate){
-				numRec = 1;
-				if (Configuration.getValue("demoni.Validate.numberThread")!= null){
-					numRec = Integer.parseInt(Configuration.getValue("demoni.Validate.numberThread"));
+				numRec = 10;
+				if (Configuration.getValue("demoni.Validate.numberSql")!= null){
+					numRec = Integer.parseInt(Configuration.getValue("demoni.Validate.numberSql"));
 				}
 				elab = odb.findStatus(null, new MDStato[] {
 						mdStatoDAO.FINETRASF(), mdStatoDAO.INITVALID() }, 
 						numRec, elab);
 			}
 			if (publish){
-				numRec = 1;
-				if (Configuration.getValue("demoni.Publish.numberThread")!= null){
-					numRec = Integer.parseInt(Configuration.getValue("demoni.Publish.numberThread"));
+				numRec = 10;
+				if (Configuration.getValue("demoni.Publish.numberSql")!= null){
+					numRec = Integer.parseInt(Configuration.getValue("demoni.Publish.numberSql"));
 				}
 				elab = odb.findStatus(null, new MDStato[] {
 						mdStatoDAO.FINEVALID(), mdStatoDAO.INITPUBLISH() }, 
@@ -157,7 +182,7 @@ public class MDDemoniController extends MDDemoniThred {
 				lastCoda = myDate;
 				command=new Vector<String>();
 				command.add("Coda");
-				pCoda = new ExecuteProcer(command, "Coda", fileConf);
+				pCoda = new ExecuteProcer(command, "Coda", null, fileConf);
 				pCoda.start();
 			}
 			if (pGeoReplica != null){
@@ -175,10 +200,27 @@ public class MDDemoniController extends MDDemoniThred {
 				for (int x=0; x<elab.size(); x++){
 					mdFileTmp = elab.get(x);
 					FactoryDAO.initialize(mdFileTmp.getStato());
-					if (mdFileTmp.getStato().getId().equals(MDStatoDAO.FINEARCHIVE) ||
+					application = null;
+					id = null;
+					if (mdFileTmp.getStato().getId().equals(MDStatoDAO.FINETRASF) ||
+							mdFileTmp.getStato().getId().equals(MDStatoDAO.INITVALID)){
+						application = "Validate";
+						id = mdFileTmp.getId();
+					} else if (mdFileTmp.getStato().getId().equals(MDStatoDAO.FINEVALID) ||
+							mdFileTmp.getStato().getId().equals(MDStatoDAO.INITPUBLISH)){
+						application = "Publish";
+						id = mdFileTmp.getId();
+					} else if (mdFileTmp.getStato().getId().equals(MDStatoDAO.FINEARCHIVE) ||
 							mdFileTmp.getStato().getId().equals(MDStatoDAO.INITINDEX)){
-						checkProces("SolrIndex", false);
-						execute("SolrIndex", mdFileTmp.getId());
+						application = "SolrIndex";
+						id = mdFileTmp.getId();
+					}
+
+					if (application!= null && id != null){
+						if (!isExecute(application, id)){
+							checkProces(application, false);
+							execute(application, id);
+						}
 					}
 				}
 			}
@@ -196,29 +238,31 @@ public class MDDemoniController extends MDDemoniThred {
 			log.error(e.getMessage(), e);
 		} finally{
 			log.info("Fine esecuzione processo per il Controller");
-			if (lProcess != null){
-				keys = lProcess.keys();
-				while(keys.hasMoreElements()){
-					try {
-						key = keys.nextElement();
-						checkProces(key, true);
-					} catch (NumberFormatException e) {
-						log.error(e.getMessage(), e);
-					} catch (HibernateException e) {
-						log.error(e.getMessage(), e);
-					} catch (ConfigurationException e) {
-						log.error(e.getMessage(), e);
-					} catch (InterruptedException e) {
-						log.error(e.getMessage(), e);
-					} catch (NamingException e) {
-						log.error(e.getMessage(), e);
-					}
-				}
-			}
 		}
 
 	}
 
+	/**
+	 * Veridica se il processo risulti già in esecuzione
+	 * @param application
+	 * @param key
+	 * @return
+	 */
+	private boolean isExecute(String application, String key){
+		boolean execute = false;
+		Hashtable<String, ExecuteProcer> lProcess =null;
+
+		if (this.lProcess != null){
+			if (this.lProcess.get(application)!= null){
+				lProcess = this.lProcess.get(application);
+				if (lProcess.get(key)!=null){
+					execute = true;
+				}
+			}
+		}
+		return execute;
+	}
+	
 	/**
 	 * Metodo utilizzato per testare lo stao dei processi
 	 * 
@@ -249,7 +293,6 @@ public class MDDemoniController extends MDDemoniThred {
 				if (Configuration.getValue("demoni."+application+".numberThread") != null){
 					numThread = Integer.valueOf(Configuration.getValue("demoni."+application+".numberThread"));
 				}
-				System.out.println("numThread: "+numThread);
 				while(true){
 					conta =0;
 					keys =lProcess.keys();
@@ -265,21 +308,16 @@ public class MDDemoniController extends MDDemoniThred {
 						if (conta==0){
 							break;
 						} else {
-							System.out.println("Rimango in attesa");
 							Thread.sleep(5000);
 						}
 					} else {
-						System.out.println("conta: "+conta);
 						if (conta<numThread){
-							System.out.println("Esco ");
 							break;
 						} else {
-							System.out.println("Rimango in attesa");
 							Thread.sleep(5000);
 						}
 					}
 				}
-				System.out.println("Ci sono posti disponibili per i processi");
 			}
 		} catch (NumberFormatException e) {
 			throw e;
@@ -319,9 +357,13 @@ public class MDDemoniController extends MDDemoniThred {
 			command=new Vector<String>();
 			command.add(application);
 			command.add(objectIdentifierPremis);
-			executeProc = new ExecuteProcer(command, application, fileConf);
+			executeProc = new ExecuteProcer(command, application, objectIdentifierPremis, fileConf);
 			executeProc.start();
-			lProcess = new Hashtable<String, ExecuteProcer>();
+			if (this.lProcess.get(application) ==null){
+				lProcess = new Hashtable<String, ExecuteProcer>();
+			} else {
+				lProcess = this.lProcess.get(application);
+			}
 			lProcess.put(objectIdentifierPremis, executeProc);
 			this.lProcess.put(application, lProcess);
 		} catch (IOException e) {
