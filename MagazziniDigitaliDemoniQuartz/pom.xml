@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 	<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<description>Progetto per la gestione dei Demoni per i Magazzino Digitale basato sulla tecnologia Quartz per la Schedulazione delle attività</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>it.bncf.magazziniDigitali.businessLogic</groupId>
 			<artifactId>MagazziniDigitaliBusinessLogic</artifactId>
-			<version>1.0.36</version>
+			<version>1.0.38</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
-			<version>2.2.1</version>
+			<version>2.2.3</version>
 		</dependency>
 	</dependencies>
 </project>
