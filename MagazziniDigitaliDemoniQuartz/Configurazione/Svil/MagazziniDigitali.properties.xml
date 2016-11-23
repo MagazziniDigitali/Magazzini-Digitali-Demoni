@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+    <comment>Fie di configurazione del progetto MD Versione 2.x.x</comment>
+
+    <!-- URL da contattare per poter fare l'autenticazione del Software -->
+    <entry key="software.URLAuthentication">http://md-tomcat01.test.bncf.lan:8081/MagazziniDigitaliServices/services/AuthenticationSoftwarePort?wsdl</entry>
+
+    <!-- Configurazione Software Interfaccia Api -->
+    <entry key="software.DQ_Scheduler.login">DQ_Scheduler_MD</entry>
+    <entry key="software.DQ_Scheduler.password">m@9@221n1</entry>
+
+    <entry key="software.DQ_Processing.login">DQ_Processing_MD</entry>
+    <entry key="software.DQ_Processing.password">m@9@221n1</entry>
+
+    <entry key="md.sendRsync.path">/opt/local/bin/rsync</entry>
+
+    <entry key="demoni.Publish.mets.xslTransf.dc">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/xsl/Mets2MD.xsl</entry>
+    
+</properties>
