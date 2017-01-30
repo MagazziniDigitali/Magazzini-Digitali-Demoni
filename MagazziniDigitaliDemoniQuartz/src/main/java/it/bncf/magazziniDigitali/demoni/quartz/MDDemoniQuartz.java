@@ -22,6 +22,7 @@ import it.bncf.magazziniDigitali.configuration.exception.MDConfigurationExceptio
 import it.bncf.magazziniDigitali.database.dao.MDStatoDAO;
 import it.bncf.magazziniDigitali.database.entity.MDFilesTmp;
 import it.bncf.magazziniDigitali.database.entity.MDStato;
+import it.bncf.magazziniDigitali.demoni.quartz.genPackagesPremis.JGenPackagesPremis;
 import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JCodaGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.publish.JPublish;
@@ -71,6 +72,9 @@ public class MDDemoniQuartz extends QuartzScheduler {
 		while(!this.isShutdown()){
 			
 			try {
+
+				addScheduler(JGenPackagesPremis.class, 
+						"GenPackagesPremis");
 
 				addScheduler(JCodaGeoReplica.class, 
 						"CodaGeoReplica");
@@ -281,6 +285,9 @@ public class MDDemoniQuartz extends QuartzScheduler {
 
 			
 		try {
+
+			addReScheduler(JGenPackagesPremis.class, 
+					"GenPackagesPremis");
 
 			addReScheduler(JCodaGeoReplica.class, 
 					"CodaGeoReplica");
