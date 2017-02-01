@@ -60,6 +60,7 @@
 		<mapping
 			resource="it/bncf/magazziniDigitali/database/entity/MDSoftwareConfig.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDStato.hbm.xml" />
+		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDTicket.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDUtenti.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/Province.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/Regioni.hbm.xml" />
