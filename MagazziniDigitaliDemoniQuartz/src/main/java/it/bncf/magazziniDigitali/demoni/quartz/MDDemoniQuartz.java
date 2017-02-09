@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.Job;
 import org.quartz.JobKey;
+import org.quartz.ScheduleBuilder;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.Trigger.TriggerState;
@@ -23,6 +25,7 @@ import it.bncf.magazziniDigitali.database.dao.MDStatoDAO;
 import it.bncf.magazziniDigitali.database.entity.MDFilesTmp;
 import it.bncf.magazziniDigitali.database.entity.MDStato;
 import it.bncf.magazziniDigitali.demoni.quartz.genPackagesPremis.JGenPackagesPremis;
+import it.bncf.magazziniDigitali.demoni.quartz.genRegistroIngressi.JGenRegistroIngressi;
 import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JCodaGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.publish.JPublish;
@@ -73,14 +76,23 @@ public class MDDemoniQuartz extends QuartzScheduler {
 			
 			try {
 
+				addScheduler(JGenRegistroIngressi.class, 
+						"GenRegistroIngressi", CronScheduleBuilder.dailyAtHourAndMinute(4, 0));
+
 				addScheduler(JGenPackagesPremis.class, 
-						"GenPackagesPremis");
+						"GenPackagesPremis", CronScheduleBuilder.dailyAtHourAndMinute(3, 0));
 
 				addScheduler(JCodaGeoReplica.class, 
-						"CodaGeoReplica");
+						"CodaGeoReplica", CronScheduleBuilder.dailyAtHourAndMinute(1, 0));
+
+//				addScheduler(JCodaGeoReplica.class, 
+//						"CodaGeoReplicaTest", null);
 
 				addScheduler(JGeoReplica.class, 
-						"GeoReplica");
+						"GeoReplica", CronScheduleBuilder.dailyAtHourAndMinute(2, 0));
+
+//				addScheduler(JGeoReplica.class, 
+//						"GeoReplicaTest", null);
 
 				mdFilesTmps = null;
 				mdFilesTmps = odb.findStatus(null, new MDStato[] {
@@ -120,7 +132,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 	}
 	
 	private void addScheduler(Class<? extends Job> jClass, 
-			String tPrefix){
+			String tPrefix, ScheduleBuilder<?> schedBuilder){
 		JobKey jobKey = null;
 
 		String jobGroup = null;
@@ -138,7 +150,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 			jobKey = new JobKey(jobName, jobGroup);
 			if (!scheduler.checkExists(jobKey)){
 				QuartzTools.startJob(scheduler, jClass, jobGroup, jobName, triggerGroup,
-						triggerName, params);
+						triggerName, params, schedBuilder);
 			}
 		} catch (SchedulerException e) {
 			log.error(e.getMessage(),e);
@@ -285,6 +297,8 @@ public class MDDemoniQuartz extends QuartzScheduler {
 
 			
 		try {
+			addReScheduler(JGenRegistroIngressi.class, 
+					"GenRegistroIngressi");
 
 			addReScheduler(JGenPackagesPremis.class, 
 					"GenPackagesPremis");
