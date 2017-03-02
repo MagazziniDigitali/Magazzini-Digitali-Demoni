@@ -26,12 +26,15 @@ import it.bncf.magazziniDigitali.database.entity.MDFilesTmp;
 import it.bncf.magazziniDigitali.database.entity.MDStato;
 import it.bncf.magazziniDigitali.demoni.quartz.genPackagesPremis.JGenPackagesPremis;
 import it.bncf.magazziniDigitali.demoni.quartz.genRegistroIngressi.JGenRegistroIngressi;
+import it.bncf.magazziniDigitali.demoni.quartz.genTicket.JGenTicket;
 import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JCodaGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.publish.JPublish;
 import it.bncf.magazziniDigitali.demoni.quartz.solrIndex.JSolrIndex;
 import it.bncf.magazziniDigitali.demoni.quartz.validate.JValidate;
 import it.depositolegale.configuration.MDConfiguration;
+import mx.randalf.configuration.Configuration;
+import mx.randalf.configuration.exception.ConfigurationException;
 import mx.randalf.hibernate.exception.HibernateUtilException;
 import mx.randalf.quartz.QuartzScheduler;
 import mx.randalf.quartz.QuartzTools;
@@ -76,50 +79,76 @@ public class MDDemoniQuartz extends QuartzScheduler {
 			
 			try {
 
-				addScheduler(JGenRegistroIngressi.class, 
-						"GenRegistroIngressi", CronScheduleBuilder.dailyAtHourAndMinute(4, 0));
-
-				addScheduler(JGenPackagesPremis.class, 
-						"GenPackagesPremis", CronScheduleBuilder.dailyAtHourAndMinute(3, 0));
-
 				addScheduler(JCodaGeoReplica.class, 
-						"CodaGeoReplica", CronScheduleBuilder.dailyAtHourAndMinute(1, 0));
-
-//				addScheduler(JCodaGeoReplica.class, 
-//						"CodaGeoReplicaTest", null);
+						"CodaGeoReplica", 
+						CronScheduleBuilder.dailyAtHourAndMinute(
+								Integer.parseInt(Configuration.getValueDefault("codaGeoReplica.cronHour", "1")), 
+								Integer.parseInt(Configuration.getValueDefault("codaGeoReplica.cronMinute", "0"))), 
+						"codaGeoReplica");
 
 				addScheduler(JGeoReplica.class, 
-						"GeoReplica", CronScheduleBuilder.dailyAtHourAndMinute(2, 0));
+						"GeoReplica", 
+						CronScheduleBuilder.dailyAtHourAndMinute(
+								Integer.parseInt(Configuration.getValueDefault("geoReplica.cronHour", "2")), 
+								Integer.parseInt(Configuration.getValueDefault("geoReplica.cronMinute", "0"))), 
+						"geoReplica");
 
-//				addScheduler(JGeoReplica.class, 
-//						"GeoReplicaTest", null);
+				addScheduler(JGenPackagesPremis.class, 
+						"GenPackagesPremis", 
+						CronScheduleBuilder.dailyAtHourAndMinute(
+								Integer.parseInt(Configuration.getValueDefault("genPackagesPremis.cronHour", "3")), 
+								Integer.parseInt(Configuration.getValueDefault("genPackagesPremis.cronMinute", "0"))), 
+						"genPackagesPremis");
 
-				mdFilesTmps = null;
-				mdFilesTmps = odb.findStatus(null, new MDStato[] {
-						mdStatoDAO.FINETRASF(), mdStatoDAO.INITVALID() }, 
-						0, mdFilesTmps);
-				addScheduler(JValidate.class, 
-						mdFilesTmps,
-						"Validate");
+				addScheduler(JGenRegistroIngressi.class, 
+						"GenRegistroIngressi", 
+						CronScheduleBuilder.dailyAtHourAndMinute(
+								Integer.parseInt(Configuration.getValueDefault("genRegistroIngressi.cronHour", "4")), 
+								Integer.parseInt(Configuration.getValueDefault("genRegistroIngressi.cronMinute", "0"))), 
+						"genRegistroIngressi");
 
-				mdFilesTmps = null;
-				mdFilesTmps = odb.findStatus(null, new MDStato[] {
-						mdStatoDAO.FINEVALID(), mdStatoDAO.INITPUBLISH() }, 
-						0, mdFilesTmps);
-				addScheduler(JPublish.class, 
-						mdFilesTmps,
-						"Publish");
+				addScheduler(JGenTicket.class, 
+						"GenTicket", 
+						CronScheduleBuilder.dailyAtHourAndMinute(
+								Integer.parseInt(Configuration.getValueDefault("genTicket.cronHour", "5")), 
+								Integer.parseInt(Configuration.getValueDefault("genTicket.cronMinute", "0"))), 
+						"genTicket");
 
-				mdFilesTmps = null;
-				mdFilesTmps = odb.findStatus(null, new MDStato[] {
-						mdStatoDAO.FINEARCHIVE(), mdStatoDAO.INITINDEX() }, 
-						0, mdFilesTmps);
-				addScheduler(JSolrIndex.class, 
-						mdFilesTmps,
-						"SolrIndex");
+				if (Configuration.getValueDefault("validate.enable", "true").equalsIgnoreCase("true")){
+					mdFilesTmps = null;
+					mdFilesTmps = odb.findStatus(null, new MDStato[] {
+							mdStatoDAO.FINETRASF(), mdStatoDAO.INITVALID() }, 
+							0, mdFilesTmps);
+					addScheduler(JValidate.class, 
+							mdFilesTmps,
+							"Validate");
+				}
+
+				if (Configuration.getValueDefault("publisher.enable", "true").equalsIgnoreCase("true")){
+					mdFilesTmps = null;
+					mdFilesTmps = odb.findStatus(null, new MDStato[] {
+							mdStatoDAO.FINEVALID(), mdStatoDAO.INITPUBLISH() }, 
+							0, mdFilesTmps);
+					addScheduler(JPublish.class, 
+							mdFilesTmps,
+							"Publish");
+				}
+
+				if (Configuration.getValueDefault("solrIndex.enable", "true").equalsIgnoreCase("true")){
+					mdFilesTmps = null;
+					mdFilesTmps = odb.findStatus(null, new MDStato[] {
+							mdStatoDAO.FINEARCHIVE(), mdStatoDAO.INITINDEX() }, 
+							0, mdFilesTmps);
+					addScheduler(JSolrIndex.class, 
+							mdFilesTmps,
+							"SolrIndex");
+				}
 			} catch (HibernateException e) {
 				log.error(e.getMessage(),e);
 			} catch (HibernateUtilException e) {
+				e.printStackTrace();
+				log.error(e.getMessage(),e);
+			} catch (ConfigurationException e) {
 				e.printStackTrace();
 				log.error(e.getMessage(),e);
 			}
@@ -130,7 +159,18 @@ public class MDDemoniQuartz extends QuartzScheduler {
 			}
 		}
 	}
-	
+
+	private void addScheduler(Class<? extends Job> jClass, String tPrefix, ScheduleBuilder<?> schedBuilder,
+			String cPrefix) throws ConfigurationException {
+		if (Configuration.getValueDefault(cPrefix+".enable", "true").equalsIgnoreCase("true")){
+			if (Configuration.getValueDefault(cPrefix+".test", "false").equalsIgnoreCase("true")){
+				addScheduler(jClass, tPrefix+"Test", null);
+			} else {
+				addScheduler(jClass, tPrefix, schedBuilder);
+			}
+		}
+	}
+
 	private void addScheduler(Class<? extends Job> jClass, 
 			String tPrefix, ScheduleBuilder<?> schedBuilder){
 		JobKey jobKey = null;
@@ -210,6 +250,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 
 				if (MDDemoniQuartz.mdConfiguration.getSoftware().getErrorMsg() ==null ||
 						MDDemoniQuartz.mdConfiguration.getSoftware().getErrorMsg().length==0){
+					
 					if (args[2].equalsIgnoreCase("stop")){
 						closeSocket = true;
 					} else if (args[2].equalsIgnoreCase("start")){
@@ -217,10 +258,8 @@ public class MDDemoniQuartz extends QuartzScheduler {
 					} else if (args[2].equalsIgnoreCase("rescheduling")){
 						rescheduling = true;
 					} else {
-						System.out.println("E' necessario indicare i seguenti parametri:");
-						System.out.println("1) Path files Configurazione");
-						System.out.println("2) Codice identificativo del Software");
-						System.out.println("3) Azione (start/stop/rescheduling)");
+						printHelp();
+						System.exit(-1);
 					}
 	
 					socketPort = MDDemoniQuartz.mdConfiguration.getSoftwareConfigInteger("socketPort");
@@ -270,16 +309,20 @@ public class MDDemoniQuartz extends QuartzScheduler {
 				}
 
 			} else {
-				System.out.println("E' necessario indicare i seguenti parametri:");
-				System.out.println("1) Path files Configurazione");
-				System.out.println("2) Codice identificativo del Software");
-				System.out.println("3) Azione (start/stop)");
+				printHelp();
 			}
 		} catch (SchedulerException e) {
 			log.error(e.getMessage(),e);
 		} catch (MDConfigurationException e) {
 			log.error(e.getMessage(),e);
 		}
+	}
+
+	private static void printHelp(){
+		System.out.println("E' necessario indicare i seguenti parametri:");
+		System.out.println("1) Path files Configurazione");
+		System.out.println("2) Codice identificativo del Software");
+		System.out.println("3) Azione (start/stop/rescheduling)");
 	}
 
 	/**

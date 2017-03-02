@@ -16,5 +16,35 @@
     <entry key="md.sendRsync.path">/opt/local/bin/rsync</entry>
 
     <entry key="demoni.Publish.mets.xslTransf.dc">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/xsl/Mets2MD.xsl</entry>
+
+    <entry key="codaGeoReplica.enable">true</entry>
+    <entry key="codaGeoReplica.test">true</entry>
+    <entry key="codaGeoReplica.cronHour">1</entry>
+    <entry key="codaGeoReplica.cronMinute">0</entry>
     
+    <entry key="geoReplica.enable">true</entry>
+    <entry key="geoReplica.test">true</entry>
+    <entry key="geoReplica.cronHour">2</entry>
+    <entry key="geoReplica.cronMinute">0</entry>
+    
+    <entry key="genPackagesPremis.enable">false</entry>
+    <entry key="genPackagesPremis.test">false</entry>
+    <entry key="genPackagesPremis.cronHour">3</entry>
+    <entry key="genPackagesPremis.cronMinute">0</entry>
+    
+    <entry key="genRegistroIngressi.enable">false</entry>
+    <entry key="genRegistroIngressi.test">false</entry>
+    <entry key="genRegistroIngressi.cronHour">4</entry>
+    <entry key="genRegistroIngressi.cronMinute">0</entry>
+    
+    <entry key="genTicket.enable">false</entry>
+    <entry key="genTicket.test">true</entry>
+    <entry key="genTicket.cronHour">5</entry>
+    <entry key="genTicket.cronMinute">0</entry>
+    
+    <entry key="validate.enable">false</entry>
+
+    <entry key="publisher.enable">false</entry>
+
+    <entry key="solrIndex.enable">true</entry>
 </properties>
