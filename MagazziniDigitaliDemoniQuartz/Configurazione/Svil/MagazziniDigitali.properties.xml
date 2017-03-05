@@ -17,12 +17,12 @@
 
     <entry key="demoni.Publish.mets.xslTransf.dc">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/xsl/Mets2MD.xsl</entry>
 
-    <entry key="codaGeoReplica.enable">true</entry>
+    <entry key="codaGeoReplica.enable">false</entry>
     <entry key="codaGeoReplica.test">true</entry>
     <entry key="codaGeoReplica.cronHour">1</entry>
     <entry key="codaGeoReplica.cronMinute">0</entry>
     
-    <entry key="geoReplica.enable">true</entry>
+    <entry key="geoReplica.enable">false</entry>
     <entry key="geoReplica.test">true</entry>
     <entry key="geoReplica.cronHour">2</entry>
     <entry key="geoReplica.cronMinute">0</entry>
@@ -42,9 +42,9 @@
     <entry key="genTicket.cronHour">5</entry>
     <entry key="genTicket.cronMinute">0</entry>
     
-    <entry key="validate.enable">false</entry>
+    <entry key="validate.enable">true</entry>
 
     <entry key="publisher.enable">false</entry>
 
-    <entry key="solrIndex.enable">true</entry>
+    <entry key="solrIndex.enable">false</entry>
 </properties>
