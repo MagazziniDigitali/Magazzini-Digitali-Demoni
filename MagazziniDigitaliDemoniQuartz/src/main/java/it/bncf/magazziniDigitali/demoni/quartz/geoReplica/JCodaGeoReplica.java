@@ -26,7 +26,7 @@ public class JCodaGeoReplica implements Job {
 			log.debug("Inizio della Coda GeoReplica");
 			odBusiness = new OggettoDigitaleCodaBusiness();
 			odBusiness.coda(log, 
-					MDDemoniQuartz.mdConfiguration);
+					MDDemoniQuartz.mdConfiguration, context);
 		} catch (MDConfigurationException e) {
 			throw new JobExecutionException(e.getMessage(), e);
 		} catch (SQLException e) {

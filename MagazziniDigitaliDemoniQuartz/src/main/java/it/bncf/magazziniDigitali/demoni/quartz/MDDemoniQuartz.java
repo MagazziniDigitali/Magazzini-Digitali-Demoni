@@ -73,46 +73,53 @@ public class MDDemoniQuartz extends QuartzScheduler {
 		
 		odb = new OggettoDigitaleBusiness();
 		mdStatoDAO = new MDStatoDAO();
+		Hashtable<String, Object> params = null;
 
 
 		while(!this.isShutdown()){
 			
 			try {
 
+				params = new Hashtable<String,Object>();
+				if (Configuration.getValue("codaGeoReplica.addGG") != null)params.put("addGG", Integer.parseInt(Configuration.getValue("codaGeoReplica.addGG")));
+				if (Configuration.getValue("codaGeoReplica.setHour") != null)params.put("setHour", Integer.parseInt(Configuration.getValue("codaGeoReplica.setHour")));
+				if (Configuration.getValue("codaGeoReplica.setMinute") != null)params.put("setMinute", Integer.parseInt(Configuration.getValue("codaGeoReplica.setMinute")));
+				if (Configuration.getValue("codaGeoReplica.setSecond") != null)params.put("setSecond", Integer.parseInt(Configuration.getValue("codaGeoReplica.setSecond")));
+				if (Configuration.getValue("codaGeoReplica.setMillisecond") != null)params.put("setMillisecond", Integer.parseInt(Configuration.getValue("codaGeoReplica.setMillisecond")));
 				addScheduler(JCodaGeoReplica.class, 
 						"CodaGeoReplica", 
 						CronScheduleBuilder.dailyAtHourAndMinute(
 								Integer.parseInt(Configuration.getValueDefault("codaGeoReplica.cronHour", "1")), 
 								Integer.parseInt(Configuration.getValueDefault("codaGeoReplica.cronMinute", "0"))), 
-						"codaGeoReplica");
+						"codaGeoReplica", params);
 
 				addScheduler(JGeoReplica.class, 
 						"GeoReplica", 
 						CronScheduleBuilder.dailyAtHourAndMinute(
 								Integer.parseInt(Configuration.getValueDefault("geoReplica.cronHour", "2")), 
 								Integer.parseInt(Configuration.getValueDefault("geoReplica.cronMinute", "0"))), 
-						"geoReplica");
+						"geoReplica", null);
 
 				addScheduler(JGenPackagesPremis.class, 
 						"GenPackagesPremis", 
 						CronScheduleBuilder.dailyAtHourAndMinute(
 								Integer.parseInt(Configuration.getValueDefault("genPackagesPremis.cronHour", "3")), 
 								Integer.parseInt(Configuration.getValueDefault("genPackagesPremis.cronMinute", "0"))), 
-						"genPackagesPremis");
+						"genPackagesPremis", null);
 
 				addScheduler(JGenRegistroIngressi.class, 
 						"GenRegistroIngressi", 
 						CronScheduleBuilder.dailyAtHourAndMinute(
 								Integer.parseInt(Configuration.getValueDefault("genRegistroIngressi.cronHour", "4")), 
 								Integer.parseInt(Configuration.getValueDefault("genRegistroIngressi.cronMinute", "0"))), 
-						"genRegistroIngressi");
+						"genRegistroIngressi", null);
 
 				addScheduler(JGenTicket.class, 
 						"GenTicket", 
 						CronScheduleBuilder.dailyAtHourAndMinute(
 								Integer.parseInt(Configuration.getValueDefault("genTicket.cronHour", "5")), 
 								Integer.parseInt(Configuration.getValueDefault("genTicket.cronMinute", "0"))), 
-						"genTicket");
+						"genTicket", null);
 
 				if (Configuration.getValueDefault("validate.enable", "true").equalsIgnoreCase("true")){
 					mdFilesTmps = null;
@@ -161,25 +168,24 @@ public class MDDemoniQuartz extends QuartzScheduler {
 	}
 
 	private void addScheduler(Class<? extends Job> jClass, String tPrefix, ScheduleBuilder<?> schedBuilder,
-			String cPrefix) throws ConfigurationException {
+			String cPrefix, Hashtable<String, Object> params) throws ConfigurationException {
 		if (Configuration.getValueDefault(cPrefix+".enable", "true").equalsIgnoreCase("true")){
 			if (Configuration.getValueDefault(cPrefix+".test", "false").equalsIgnoreCase("true")){
-				addScheduler(jClass, tPrefix+"Test", null);
+				addScheduler(jClass, tPrefix+"Test", null, params);
 			} else {
-				addScheduler(jClass, tPrefix, schedBuilder);
+				addScheduler(jClass, tPrefix, schedBuilder, params);
 			}
 		}
 	}
 
 	private void addScheduler(Class<? extends Job> jClass, 
-			String tPrefix, ScheduleBuilder<?> schedBuilder){
+			String tPrefix, ScheduleBuilder<?> schedBuilder, Hashtable<String, Object> params){
 		JobKey jobKey = null;
 
 		String jobGroup = null;
 		String jobName = null;
 		String triggerGroup = null;
 		String triggerName	= null;
-		Hashtable<String, Object> params = null;
 
 		jobGroup = "Job_" + tPrefix;
 		jobName = tPrefix;

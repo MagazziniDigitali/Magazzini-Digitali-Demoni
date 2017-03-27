@@ -21,8 +21,13 @@
     <entry key="codaGeoReplica.test">true</entry>
     <entry key="codaGeoReplica.cronHour">1</entry>
     <entry key="codaGeoReplica.cronMinute">0</entry>
-    
-    <entry key="geoReplica.enable">false</entry>
+    <entry key="codaGeoReplica.addGG">-1</entry>
+    <entry key="codaGeoReplica.setHour">23</entry>
+    <entry key="codaGeoReplica.setMinute">59</entry>
+    <entry key="codaGeoReplica.setSecond">59</entry>
+    <entry key="codaGeoReplica.setMillisecond">999</entry>
+                        
+    <entry key="geoReplica.enable">true</entry>
     <entry key="geoReplica.test">true</entry>
     <entry key="geoReplica.cronHour">2</entry>
     <entry key="geoReplica.cronMinute">0</entry>
@@ -42,7 +47,7 @@
     <entry key="genTicket.cronHour">5</entry>
     <entry key="genTicket.cronMinute">0</entry>
     
-    <entry key="validate.enable">true</entry>
+    <entry key="validate.enable">false</entry>
 
     <entry key="publisher.enable">false</entry>
 
