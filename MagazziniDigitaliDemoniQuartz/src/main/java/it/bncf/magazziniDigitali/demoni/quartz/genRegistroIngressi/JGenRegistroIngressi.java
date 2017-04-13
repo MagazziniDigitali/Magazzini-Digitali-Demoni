@@ -7,7 +7,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.OggettoDigitaleRegistroIngressiBusiness;
+import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.registroIngressi.OggettoDigitaleRegistroIngressiBusiness;
 import it.bncf.magazziniDigitali.configuration.exception.MDConfigurationException;
 import it.bncf.magazziniDigitali.demoni.quartz.MDDemoniQuartz;
 

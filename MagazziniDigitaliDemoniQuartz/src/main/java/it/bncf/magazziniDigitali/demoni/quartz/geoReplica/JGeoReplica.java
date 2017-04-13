@@ -21,8 +21,8 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import it.bncf.magazziniDigitali.businessLogic.filesTmp.MDFilesTmpBusiness;
+import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.geoReplica.OggettoDigitaleGeoReplica;
 import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitale;
-import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitaleGeoReplica;
 import it.bncf.magazziniDigitali.configuration.exception.MDConfigurationException;
 import it.bncf.magazziniDigitali.database.dao.MDStatoDAO;
 import it.bncf.magazziniDigitali.database.entity.MDFilesTmp;

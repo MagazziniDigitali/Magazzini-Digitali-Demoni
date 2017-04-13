@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 	<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-	<version>2.0.12</version>
+	<version>2.0.13</version>
 	<description>Progetto per la gestione dei Demoni per i Magazzino Digitale basato sulla tecnologia Quartz per la Schedulazione delle attività</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -11,11 +11,6 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>it.bncf.magazziniDigitali.businessLogic</groupId>
-			<artifactId>MagazziniDigitaliBusinessLogic</artifactId>
-			<version>2.0.12</version>
-		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -25,6 +20,70 @@
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>1.4.01</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.publish
+			</groupId>
+			<artifactId>
+				MagazziniDigitaliBusinessLogicPublish
+			</artifactId>
+			<version>2.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>it.bncf.magazziniDigitali.services.client</groupId>
+			<artifactId>MagazziniDigitaliServicesClient</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.solr
+			</groupId>
+			<artifactId>MagazziniDigitaliBusinessLogicSolr</artifactId>
+			<version>2.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.geoReplica
+			</groupId>
+			<artifactId>
+				MagazziniDigitaliBusinessLogicGeoReplica
+			</artifactId>
+			<version>2.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.coda
+			</groupId>
+			<artifactId>MagazziniDigitaliBusinessLogicCoda</artifactId>
+			<version>2.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.ticket
+			</groupId>
+			<artifactId>
+				MagazziniDigitaliBusinessLogicTicket
+			</artifactId>
+			<version>2.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.registroIngressi
+			</groupId>
+			<artifactId>
+				MagazziniDigitaliBusinessLogicRegistroIngressi
+			</artifactId>
+			<version>2.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>
+				it.bncf.magazziniDigitali.businessLogic.packagesPremis
+			</groupId>
+			<artifactId>
+				MagazziniDigitaliBusinessLogicPackagesPremis
+			</artifactId>
+			<version>2.0.13</version>
 		</dependency>
 	</dependencies>
 	<build>
