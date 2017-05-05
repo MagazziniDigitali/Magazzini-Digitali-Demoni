@@ -16,7 +16,6 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -30,12 +29,13 @@ import it.bncf.magazziniDigitali.demoni.quartz.MDDemoniQuartz;
 import mx.randalf.digest.SHA1;
 import mx.randalf.hibernate.FactoryDAO;
 import mx.randalf.hibernate.exception.HibernateUtilException;
+import mx.randalf.quartz.job.JobExecute;
 
 /**
  * @author massi
  *
  */
-public class JGeoReplica implements Job {
+public class JGeoReplica extends JobExecute {
 
 	private Logger log = Logger.getLogger(JGeoReplica.class);
 
@@ -43,48 +43,6 @@ public class JGeoReplica implements Job {
 	 * 
 	 */
 	public JGeoReplica() {
-	}
-
-	/**
-	 * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
-	 */
-	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		File pCoda = null;
-		File[] codas = null;
-
-		try {
-			pCoda = new File(
-					MDDemoniQuartz.
-						mdConfiguration.getSoftwareConfigString("coda.path"));
-			if (pCoda.exists()){
-				codas = pCoda.listFiles(new FileFilter() {
-					
-					@Override
-					public boolean accept(File pathname) {
-						boolean ris = false;
-						File fElab = null;
-						if (pathname.isFile()){
-							if (pathname.getName().toLowerCase().endsWith(".coda")){
-								fElab = new File(pathname.getAbsolutePath()+".elab");
-								if (!fElab.exists()){
-									ris = true;
-								}
-							}
-						}
-						return ris;
-					}
-				});
-
-				Arrays.sort(codas);
-				for (File coda: codas){
-					elabCoda(coda);
-				}
-			}
-		} catch (MDConfigurationException e) {
-			log.error(e.getMessage(), e);
-		}
-
 	}
 
 	private void elabCoda( File coda){
@@ -212,6 +170,47 @@ public class JGeoReplica implements Job {
 			log.debug("Fine della Geo replica ID: "+id);
 		}
 		return esito;
+	}
+
+	@Override
+	protected String jobExecute(JobExecutionContext context) throws JobExecutionException {
+		File pCoda = null;
+		File[] codas = null;
+		String result = null;
+
+		try {
+			pCoda = new File(
+					MDDemoniQuartz.
+						mdConfiguration.getSoftwareConfigString("coda.path"));
+			if (pCoda.exists()){
+				codas = pCoda.listFiles(new FileFilter() {
+					
+					@Override
+					public boolean accept(File pathname) {
+						boolean ris = false;
+						File fElab = null;
+						if (pathname.isFile()){
+							if (pathname.getName().toLowerCase().endsWith(".coda")){
+								fElab = new File(pathname.getAbsolutePath()+".elab");
+								if (!fElab.exists()){
+									ris = true;
+								}
+							}
+						}
+						return ris;
+					}
+				});
+
+				Arrays.sort(codas);
+				for (File coda: codas){
+					elabCoda(coda);
+				}
+			}
+			result = "Geo replica terminata correttamente";
+		} catch (MDConfigurationException e) {
+			log.error(e.getMessage(), e);
+		}
+		return result;
 	}
 
 }

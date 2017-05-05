@@ -4,18 +4,18 @@
 package it.bncf.magazziniDigitali.demoni.quartz.solrIndex;
 
 import org.apache.log4j.Logger;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.implement.OggettoDigitaleSolrIndex;
 import it.bncf.magazziniDigitali.demoni.quartz.MDDemoniQuartz;
+import mx.randalf.quartz.job.JobExecute;
 
 /**
  * @author massi
  *
  */
-public class JSolrIndex implements Job {
+public class JSolrIndex extends JobExecute {
 
 	private Logger log = Logger.getLogger(JSolrIndex.class);
 
@@ -29,9 +29,10 @@ public class JSolrIndex implements Job {
 	 * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
 	 */
 	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
+	protected String jobExecute(JobExecutionContext context) throws JobExecutionException {
 		OggettoDigitaleSolrIndex odSolrIndex = null;
 		String id = null;
+		String result = null;
 
 		id = context.getJobDetail().
 				getJobDataMap().getString("ID");
@@ -42,6 +43,8 @@ public class JSolrIndex implements Job {
 				"SolrIndex",
 				MDDemoniQuartz.mdConfiguration);
 		log.debug("Fine della Indicizzazaione in Solr ID: "+id);
+		result = "Indicizzazione su solr ID "+id+" eseguita corretamente";
+		return result;
 	}
 
 }

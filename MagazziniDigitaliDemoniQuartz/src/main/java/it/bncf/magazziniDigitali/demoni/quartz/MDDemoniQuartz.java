@@ -32,12 +32,14 @@ import it.bncf.magazziniDigitali.demoni.quartz.geoReplica.JGeoReplica;
 import it.bncf.magazziniDigitali.demoni.quartz.publish.JPublish;
 import it.bncf.magazziniDigitali.demoni.quartz.solrIndex.JSolrIndex;
 import it.bncf.magazziniDigitali.demoni.quartz.validate.JValidate;
+import it.bncf.magazziniDigitali.demoni.quartz.verificaPreRegistrazione.JVerificaPreRegistrazione;
 import it.depositolegale.configuration.MDConfiguration;
 import mx.randalf.configuration.Configuration;
 import mx.randalf.configuration.exception.ConfigurationException;
 import mx.randalf.hibernate.exception.HibernateUtilException;
 import mx.randalf.quartz.QuartzScheduler;
 import mx.randalf.quartz.QuartzTools;
+import mx.randalf.quartz.job.JobExecute;
 
 /**
  * @author massi
@@ -80,6 +82,11 @@ public class MDDemoniQuartz extends QuartzScheduler {
 			
 			try {
 
+				addScheduler(JVerificaPreRegistrazione.class,
+						"VerificaPreRegistrazione",
+						null,
+						"verificaPreRegistrazione", null);
+				
 				params = new Hashtable<String,Object>();
 				if (Configuration.getValue("codaGeoReplica.addGG") != null)params.put("addGG", Integer.parseInt(Configuration.getValue("codaGeoReplica.addGG")));
 				if (Configuration.getValue("codaGeoReplica.setHour") != null)params.put("setHour", Integer.parseInt(Configuration.getValue("codaGeoReplica.setHour")));
@@ -167,7 +174,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 		}
 	}
 
-	private void addScheduler(Class<? extends Job> jClass, String tPrefix, ScheduleBuilder<?> schedBuilder,
+	private void addScheduler(Class<? extends JobExecute> jClass, String tPrefix, ScheduleBuilder<?> schedBuilder,
 			String cPrefix, Hashtable<String, Object> params) throws ConfigurationException {
 		if (Configuration.getValueDefault(cPrefix+".enable", "true").equalsIgnoreCase("true")){
 			if (Configuration.getValueDefault(cPrefix+".test", "false").equalsIgnoreCase("true")){
@@ -178,7 +185,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 		}
 	}
 
-	private void addScheduler(Class<? extends Job> jClass, 
+	private void addScheduler(Class<? extends JobExecute> jClass, 
 			String tPrefix, ScheduleBuilder<?> schedBuilder, Hashtable<String, Object> params){
 		JobKey jobKey = null;
 
@@ -203,7 +210,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 		}
 	}
 	
-	private void addScheduler(Class<? extends Job> jClass, List<MDFilesTmp> mdFilesTmps,
+	private void addScheduler(Class<? extends JobExecute> jClass, List<MDFilesTmp> mdFilesTmps,
 			String tPrefix){
 		JobKey jobKey = null;
 

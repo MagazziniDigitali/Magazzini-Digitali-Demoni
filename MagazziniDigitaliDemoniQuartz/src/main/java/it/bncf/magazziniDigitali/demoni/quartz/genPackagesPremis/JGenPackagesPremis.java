@@ -3,15 +3,15 @@ package it.bncf.magazziniDigitali.demoni.quartz.genPackagesPremis;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import it.bncf.magazziniDigitali.businessLogic.oggettoDigitale.packegesPremis.OggettoDigitalePackagesPremisBusiness;
 import it.bncf.magazziniDigitali.configuration.exception.MDConfigurationException;
 import it.bncf.magazziniDigitali.demoni.quartz.MDDemoniQuartz;
+import mx.randalf.quartz.job.JobExecute;
 
-public class JGenPackagesPremis implements Job {
+public class JGenPackagesPremis extends JobExecute {
 
 	private Logger log = Logger.getLogger(JGenPackagesPremis.class);
 
@@ -19,14 +19,16 @@ public class JGenPackagesPremis implements Job {
 	}
 
 	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
+	protected String jobExecute(JobExecutionContext context) throws JobExecutionException {
 		OggettoDigitalePackagesPremisBusiness odBusiness = null;
+		String result = null;
 
 		try {
 			log.debug("Inizio la Pacchettizzazione dei tacciati Premis");
 			odBusiness = new OggettoDigitalePackagesPremisBusiness();
 			odBusiness.packagePremis(log, 
 					MDDemoniQuartz.mdConfiguration);
+			result = "Generazione pachetti premis completato";
 		} catch (MDConfigurationException e) {
 			throw new JobExecutionException(e.getMessage(), e);
 		} catch (SQLException e) {
@@ -34,6 +36,7 @@ public class JGenPackagesPremis implements Job {
 		} finally {
 			log.debug("Fine della Pacchettizzazione dei tacciati Premis");
 		}
+		return result;
 	}
 
 }
