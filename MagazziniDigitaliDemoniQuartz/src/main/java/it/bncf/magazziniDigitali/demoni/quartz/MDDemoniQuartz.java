@@ -85,7 +85,7 @@ public class MDDemoniQuartz extends QuartzScheduler {
 				addScheduler(JVerificaPreRegistrazione.class,
 						"VerificaPreRegistrazione",
 						null,
-						"verificaPreRegistrazione", null);
+						"verificaPreRegistrazione", null, true);
 				
 				params = new Hashtable<String,Object>();
 				if (Configuration.getValue("codaGeoReplica.addGG") != null)params.put("addGG", Integer.parseInt(Configuration.getValue("codaGeoReplica.addGG")));
@@ -176,23 +176,30 @@ public class MDDemoniQuartz extends QuartzScheduler {
 
 	private void addScheduler(Class<? extends JobExecute> jClass, String tPrefix, ScheduleBuilder<?> schedBuilder,
 			String cPrefix, Hashtable<String, Object> params) throws ConfigurationException {
+		addScheduler(jClass, tPrefix, schedBuilder, cPrefix, params, false);
+	}
+
+	private void addScheduler(Class<? extends JobExecute> jClass, String tPrefix, ScheduleBuilder<?> schedBuilder,
+			String cPrefix, Hashtable<String, Object> params, boolean reSchedulerJobComplete) throws ConfigurationException {
 		if (Configuration.getValueDefault(cPrefix+".enable", "true").equalsIgnoreCase("true")){
 			if (Configuration.getValueDefault(cPrefix+".test", "false").equalsIgnoreCase("true")){
-				addScheduler(jClass, tPrefix+"Test", null, params);
+				addScheduler(jClass, tPrefix+"Test", null, params, reSchedulerJobComplete);
 			} else {
-				addScheduler(jClass, tPrefix, schedBuilder, params);
+				addScheduler(jClass, tPrefix, schedBuilder, params, reSchedulerJobComplete);
 			}
 		}
 	}
 
 	private void addScheduler(Class<? extends JobExecute> jClass, 
-			String tPrefix, ScheduleBuilder<?> schedBuilder, Hashtable<String, Object> params){
+			String tPrefix, ScheduleBuilder<?> schedBuilder, Hashtable<String, Object> params, boolean reSchedulerJobComplete){
 		JobKey jobKey = null;
 
 		String jobGroup = null;
 		String jobName = null;
 		String triggerGroup = null;
 		String triggerName	= null;
+		TriggerKey triggerKey = null;
+		TriggerState triggerState = null;
 
 		jobGroup = "Job_" + tPrefix;
 		jobName = tPrefix;
@@ -201,9 +208,17 @@ public class MDDemoniQuartz extends QuartzScheduler {
 		try {
 			triggerName = scheduler.getSchedulerInstanceId();
 			jobKey = new JobKey(jobName, jobGroup);
+			triggerKey = new TriggerKey(triggerName, triggerGroup);
 			if (!scheduler.checkExists(jobKey)){
 				QuartzTools.startJob(scheduler, jClass, jobGroup, jobName, triggerGroup,
 						triggerName, params, schedBuilder);
+			} else {
+				triggerState = scheduler.getTriggerState(triggerKey);
+				if (triggerState.compareTo(TriggerState.COMPLETE)==0 && reSchedulerJobComplete){
+					scheduler.deleteJob(jobKey);
+					QuartzTools.startJob(scheduler, jClass, jobGroup, jobName, triggerGroup,
+							triggerName, params, schedBuilder);
+				}
 			}
 		} catch (SchedulerException e) {
 			log.error(e.getMessage(),e);
@@ -297,6 +312,11 @@ public class MDDemoniQuartz extends QuartzScheduler {
 								+ "Porta per la chiusura del programma: "+socketPort);
 					}
 		
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					quartzDeskScheduler = new 
 							MDDemoniQuartz(processing, 
 									args[0]+"/quartz.properties", 

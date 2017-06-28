@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 	<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-	<version>2.0.14</version>
+	<version>2.0.15</version>
 	<description>Progetto per la gestione dei Demoni per i Magazzino Digitale basato sulla tecnologia Quartz per la Schedulazione delle attività</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,19 +28,19 @@
 			<artifactId>
 				MagazziniDigitaliBusinessLogicPublish
 			</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>it.bncf.magazziniDigitali.services.client</groupId>
 			<artifactId>MagazziniDigitaliServicesClient</artifactId>
-			<version>2.0.10</version>
+			<version>2.0.11</version>
 		</dependency>
 		<dependency>
 			<groupId>
 				it.bncf.magazziniDigitali.businessLogic.solr
 			</groupId>
 			<artifactId>MagazziniDigitaliBusinessLogicSolr</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -49,14 +49,14 @@
 			<artifactId>
 				MagazziniDigitaliBusinessLogicGeoReplica
 			</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>
 				it.bncf.magazziniDigitali.businessLogic.coda
 			</groupId>
 			<artifactId>MagazziniDigitaliBusinessLogicCoda</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -65,7 +65,7 @@
 			<artifactId>
 				MagazziniDigitaliBusinessLogicTicket
 			</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -74,7 +74,7 @@
 			<artifactId>
 				MagazziniDigitaliBusinessLogicRegistroIngressi
 			</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -83,7 +83,7 @@
 			<artifactId>
 				MagazziniDigitaliBusinessLogicPackagesPremis
 			</artifactId>
-			<version>2.0.14</version>
+			<version>2.0.15</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -92,7 +92,7 @@
 			<artifactId>
 				MagazziniDigitaliVerificaPreRegistrazione
 			</artifactId>
-			<version>2.0.0</version>
+			<version>2.0.1</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -12,6 +12,7 @@ import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
 
 import it.bncf.magazziniDigitali.configuration.exception.MDConfigurationException;
+import it.bncf.magazziniDigitali.database.dao.MDPreRegistrazioneDAO;
 import it.bncf.magazziniDigitali.demoni.quartz.MDDemoniQuartz;
 import it.depositolegale.gestionale.verifica.preRegistrazione.ReadGoogle;
 import mx.randalf.hibernate.exception.HibernateUtilException;
@@ -37,16 +38,24 @@ public class JVerificaPreRegistrazione extends JobExecute {
 	@Override
 	protected String jobExecute(JobExecutionContext context) throws JobExecutionException {
 		ReadGoogle readGoogle = null;
-		int nRow = 2;
+		Integer nRow = 2;
 		String login = null;
 		String password = null;
 		String urlConfirm = null;
+		MDPreRegistrazioneDAO mdPreRegistrazioneDAO = null;
 		
 		try {
 			login = MDDemoniQuartz.mdConfiguration.getSoftwareConfigString("send.email.login");
 			password = MDDemoniQuartz.mdConfiguration.getSoftwareConfigString("send.email.password");
 			urlConfirm = MDDemoniQuartz.mdConfiguration.getSoftwareConfigString("url.validate");
 			readGoogle = new ReadGoogle(login, password, urlConfirm);
+
+			mdPreRegistrazioneDAO = new MDPreRegistrazioneDAO();
+			nRow = mdPreRegistrazioneDAO.max("progressivo");
+
+			if (nRow == null || nRow ==0){
+				nRow=2;
+			}
 			while (!context.getScheduler().isShutdown()){
 				nRow = readGoogle.analizza(nRow);
 				try {
