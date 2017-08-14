@@ -55,23 +55,25 @@ public class JVerificaPreRegistrazione extends JobExecute {
 
 			if (nRow == null || nRow ==0){
 				nRow=2;
+			} else {
+				nRow++;
 			}
-			while (!context.getScheduler().isShutdown()){
+//			while (!context.getScheduler().isShutdown()){
 				nRow = readGoogle.analizza(nRow);
 				try {
 					Thread.sleep(60000);
 				} catch (InterruptedException e) {
 				}
-			}
+//			}
 		} catch (HibernateException e) {
 			log.error(e.getMessage(), e);
 			throw new JobExecutionException(e.getMessage(), e);
 		} catch (MDConfigurationException e) {
 			log.error(e.getMessage(), e);
 			throw new JobExecutionException(e.getMessage(), e);
-		} catch (SchedulerException e) {
-			log.error(e.getMessage(), e);
-			throw new JobExecutionException(e.getMessage(), e);
+//		} catch (SchedulerException e) {
+//			log.error(e.getMessage(), e);
+//			throw new JobExecutionException(e.getMessage(), e);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 			throw new JobExecutionException(e.getMessage(), e);
