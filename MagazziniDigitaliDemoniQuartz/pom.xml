@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 	<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-	<version>2.0.19</version>
+	<version>2.0.20</version>
 	<description>Progetto per la gestione dei Demoni per i Magazzino Digitale basato sulla tecnologia Quartz per la Schedulazione delle attività</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>it.bncf.magazziniDigitali.services.client</groupId>
 			<artifactId>MagazziniDigitaliServicesClient</artifactId>
-			<version>2.0.13</version>
+			<version>2.0.14</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -49,7 +49,7 @@
 			<artifactId>
 				MagazziniDigitaliBusinessLogicGeoReplica
 			</artifactId>
-			<version>2.0.15</version>
+			<version>2.0.16</version>
 		</dependency>
 		<dependency>
 			<groupId>

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.bncf.magazziniDigitali.demoni.clientServices</groupId>
   <artifactId>MagazziniDigitaliDemoniClientServices</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
@@ -23,6 +23,16 @@
       <artifactId>mail</artifactId>
       <version>1.5.0-b01</version>
     </dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
   </dependencies>
   <repositories>
     <repository>
