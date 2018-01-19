@@ -3,6 +3,8 @@
  */
 package it.bncf.magazziniDigitali.demoni.quartz.verificaPreRegistrazione;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.quartz.JobExecutionContext;
@@ -56,7 +58,10 @@ public class JVerificaPreRegistrazione extends JobExecute {
 				nRow++;
 			}
 //			while (!context.getScheduler().isShutdown()){
-				nRow = readGoogle.analizza(nRow);
+				nRow = readGoogle.analizza(nRow, 
+						new File(MDDemoniQuartz.mdConfiguration.getSoftwareConfigString("google.clientSecret")), 
+						MDDemoniQuartz.mdConfiguration.getSoftwareConfigString("google.spreadsheetId"), 
+						MDDemoniQuartz.mdConfiguration.getSoftwareConfigString("google.page"));
 				try {
 					Thread.sleep(60000);
 				} catch (InterruptedException e) {
