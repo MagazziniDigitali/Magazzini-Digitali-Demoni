@@ -4,53 +4,16 @@
     <comment>Fie di configurazione del progetto MD Versione 2.x.x</comment>
 
     <!-- URL da contattare per poter fare l'autenticazione del Software -->
-    <entry key="software.URLAuthentication">http://md-tomcat01.test.bncf.lan:8081/MagazziniDigitaliServices/services/AuthenticationSoftwarePort?wsdl</entry>
+    <entry key="software.URLAuthentication">http://localhost:8080/MagazziniDigitaliServices/services/AuthenticationSoftwarePort?wsdl</entry>
 
     <!-- Configurazione Software Interfaccia Api -->
-    <entry key="software.DQ_Scheduler.login">DQ_Scheduler_MD</entry>
-    <entry key="software.DQ_Scheduler.password">m@9@221n1</entry>
 
-    <entry key="software.DQ_Processing.login">DQ_Processing_MD</entry>
-    <entry key="software.DQ_Processing.password">m@9@221n1</entry>
+    <entry key="software.CodaGeoReplica.login">DQ_CodaGeoReplica_MD</entry>
+    <entry key="software.CodaGeoReplica.password">m@9@221n1</entry>
+    <entry key="software.CodaGeoReplica.quartz">quartzCodaGeoReplica.properties</entry>
 
-    <entry key="md.sendRsync.path">/opt/local/bin/rsync</entry>
+    <entry key="software.GeoReplica.login">DQ_GeoReplica_MD</entry>
+    <entry key="software.GeoReplica.password">m@9@221n1</entry>
+    <entry key="software.GeoReplica.quartz">quartzGeoReplica.properties</entry>
 
-    <entry key="demoni.Publish.mets.xslTransf.dc">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/xsl/Mets2MD.xsl</entry>
-    <entry key="demoni.Validate.json.schema">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/schema/Mets2MD.xsl</entry>
-    
-    <entry key="codaGeoReplica.enable">false</entry>
-    <entry key="codaGeoReplica.test">true</entry>
-    <entry key="codaGeoReplica.cronHour">1</entry>
-    <entry key="codaGeoReplica.cronMinute">0</entry>
-    <entry key="codaGeoReplica.addGG">-1</entry>
-    <entry key="codaGeoReplica.setHour">23</entry>
-    <entry key="codaGeoReplica.setMinute">59</entry>
-    <entry key="codaGeoReplica.setSecond">59</entry>
-    <entry key="codaGeoReplica.setMillisecond">999</entry>
-                        
-    <entry key="geoReplica.enable">true</entry>
-    <entry key="geoReplica.test">true</entry>
-    <entry key="geoReplica.cronHour">2</entry>
-    <entry key="geoReplica.cronMinute">0</entry>
-    
-    <entry key="genPackagesPremis.enable">false</entry>
-    <entry key="genPackagesPremis.test">false</entry>
-    <entry key="genPackagesPremis.cronHour">3</entry>
-    <entry key="genPackagesPremis.cronMinute">0</entry>
-    
-    <entry key="genRegistroIngressi.enable">false</entry>
-    <entry key="genRegistroIngressi.test">false</entry>
-    <entry key="genRegistroIngressi.cronHour">4</entry>
-    <entry key="genRegistroIngressi.cronMinute">0</entry>
-    
-    <entry key="genTicket.enable">false</entry>
-    <entry key="genTicket.test">true</entry>
-    <entry key="genTicket.cronHour">5</entry>
-    <entry key="genTicket.cronMinute">0</entry>
-    
-    <entry key="validate.enable">false</entry>
-
-    <entry key="publisher.enable">false</entry>
-
-    <entry key="solrIndex.enable">false</entry>
 </properties>

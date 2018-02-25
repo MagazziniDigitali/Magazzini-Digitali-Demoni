@@ -133,7 +133,7 @@ public class MDDemoniController extends MDDemoniThred {
 		String id = null;
 		
 		try {
-			log.info("Inizio esecuzione processo per il Controller");
+			log.info("\n"+"Inizio esecuzione processo per il Controller");
 			odb = new OggettoDigitaleBusiness(null);
 			mdStatoDAO = new MDStatoDAO(null);
 			if (validate){
@@ -173,12 +173,12 @@ public class MDDemoniController extends MDDemoniThred {
 			myDate.setTime(gc.getTimeInMillis());
 			if (pCoda != null){
 				if (!pCoda.isAlive()){
-					log.info("Generazione Code terminata");
+					log.info("\n"+"Generazione Code terminata");
 					pCoda = null;
 				}
 			}
 			if (coda && pCoda ==null && (lastCoda == null || lastCoda.before(myDate))){
-				log.info("Eseguo la generazione delle Code");
+				log.info("\n"+"Eseguo la generazione delle Code");
 				lastCoda = myDate;
 				command=new Vector<String>();
 				command.add("Coda");
@@ -187,12 +187,12 @@ public class MDDemoniController extends MDDemoniThred {
 			}
 			if (pGeoReplica != null){
 				if (!pGeoReplica.isAlive()){
-					log.info("Geo Replica terminata");
+					log.info("\n"+"Geo Replica terminata");
 					pGeoReplica = null;
 				}
 			}
 			if (geoReplica && pGeoReplica ==null){
-				log.info("Eseguo una geo Replica");
+				log.info("\n"+"Eseguo una geo Replica");
 				pGeoReplica = new GeoReplicaProces(this.getThreadGroup(), "pGeoReplica", testMode, null, fileConf);
 				pGeoReplica.start();
 			}
@@ -237,7 +237,7 @@ public class MDDemoniController extends MDDemoniThred {
 		} catch (InterruptedException e) {
 			log.error(e.getMessage(), e);
 		} finally{
-			log.info("Fine esecuzione processo per il Controller");
+			log.info("\n"+"Fine esecuzione processo per il Controller");
 		}
 
 	}

@@ -34,7 +34,7 @@ public class MDDemoniGeoReplica {
 			throws MDDemoniException {
 		OggettoDigitaleGeoReplica odgr = null;
 
-		log.debug("Eseguo la Geo replica ");
+		log.debug("\n"+"Eseguo la Geo replica ");
 
 		if (params != null && params.size()==1){
 			odgr = new OggettoDigitaleGeoReplica(null, log,"GeoReplica");

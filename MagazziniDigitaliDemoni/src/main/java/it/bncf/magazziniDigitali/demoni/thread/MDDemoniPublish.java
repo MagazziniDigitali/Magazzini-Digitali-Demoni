@@ -37,7 +37,7 @@ public class MDDemoniPublish {
 			throws MDDemoniException {
 		OggettoDigitalePublish odBusiness = null;
 
-		log.debug("Eseguo la Geo replica ");
+		log.debug("\n"+"Eseguo la Geo replica ");
 
 		try {
 			if (params != null && params.size()==1){

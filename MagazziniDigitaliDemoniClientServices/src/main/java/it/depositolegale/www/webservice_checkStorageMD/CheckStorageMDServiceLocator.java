@@ -22,7 +22,7 @@ public class CheckStorageMDServiceLocator extends org.apache.axis.client.Service
     }
 
     // Use to get a proxy class for CheckStorageMDPort
-    private java.lang.String CheckStorageMDPort_address = "http://127.0.0.1:8080/MagazziniDigitaliServices/services/CheckStorageMDPort";
+    private java.lang.String CheckStorageMDPort_address = "http://localhost:8080/MagazziniDigitaliServices/services/CheckStorageMDPort";
 
     public java.lang.String getCheckStorageMDPortAddress() {
         return CheckStorageMDPort_address;

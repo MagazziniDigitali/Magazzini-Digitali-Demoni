@@ -76,7 +76,7 @@ public class MDDemoni {
 		String operation = null;
 		Vector<String> params = null;
 		try {
-			log.info("Start Demoni");
+			log.info("\n"+"Start Demoni");
 			for (int x=0;x<args.length; x++){
 				if (pathProperties==null){
 					pathProperties = args[x];
@@ -167,7 +167,7 @@ public class MDDemoni {
 			if (testMode != null && testMode.equals("--test")){
 				System.out.println("Fine Test");
 			}
-			log.info("Stop Demoni");
+			log.info("\n"+"Stop Demoni");
 		} catch (ConfigurationException e) {
 			throw new  MDDemoniException(e.getMessage(), e);
 		} catch (InterruptedException e) {

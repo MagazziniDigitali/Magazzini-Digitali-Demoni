@@ -111,7 +111,7 @@ public class GeoReplicaProces extends Thread {
 		String[] st = null;
 
 		try {
-			log.info("Analizzo il file: " + coda.getAbsolutePath());
+			log.info("\n"+"Analizzo il file: " + coda.getAbsolutePath());
 			fr = new FileReader(coda);
 			br = new BufferedReader(fr);
 

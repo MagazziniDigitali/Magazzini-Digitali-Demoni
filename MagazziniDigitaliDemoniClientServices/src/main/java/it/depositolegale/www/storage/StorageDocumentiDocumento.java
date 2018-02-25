@@ -10,7 +10,7 @@ package it.depositolegale.www.storage;
 public class StorageDocumentiDocumento  implements java.io.Serializable {
     private java.lang.String nomeFile;
 
-    private java.lang.String digest;
+    private it.depositolegale.www.storage.StorageDocumentiDocumentoDigests[] digests;
 
     private java.lang.String esito;
 
@@ -21,11 +21,11 @@ public class StorageDocumentiDocumento  implements java.io.Serializable {
 
     public StorageDocumentiDocumento(
            java.lang.String nomeFile,
-           java.lang.String digest,
+           it.depositolegale.www.storage.StorageDocumentiDocumentoDigests[] digests,
            java.lang.String esito,
            java.util.Calendar dataMod) {
            this.nomeFile = nomeFile;
-           this.digest = digest;
+           this.digests = digests;
            this.esito = esito;
            this.dataMod = dataMod;
     }
@@ -52,22 +52,30 @@ public class StorageDocumentiDocumento  implements java.io.Serializable {
 
 
     /**
-     * Gets the digest value for this StorageDocumentiDocumento.
+     * Gets the digests value for this StorageDocumentiDocumento.
      * 
-     * @return digest
+     * @return digests
      */
-    public java.lang.String getDigest() {
-        return digest;
+    public it.depositolegale.www.storage.StorageDocumentiDocumentoDigests[] getDigests() {
+        return digests;
     }
 
 
     /**
-     * Sets the digest value for this StorageDocumentiDocumento.
+     * Sets the digests value for this StorageDocumentiDocumento.
      * 
-     * @param digest
+     * @param digests
      */
-    public void setDigest(java.lang.String digest) {
-        this.digest = digest;
+    public void setDigests(it.depositolegale.www.storage.StorageDocumentiDocumentoDigests[] digests) {
+        this.digests = digests;
+    }
+
+    public it.depositolegale.www.storage.StorageDocumentiDocumentoDigests getDigests(int i) {
+        return this.digests[i];
+    }
+
+    public void setDigests(int i, it.depositolegale.www.storage.StorageDocumentiDocumentoDigests _value) {
+        this.digests[i] = _value;
     }
 
 
@@ -125,9 +133,9 @@ public class StorageDocumentiDocumento  implements java.io.Serializable {
             ((this.nomeFile==null && other.getNomeFile()==null) || 
              (this.nomeFile!=null &&
               this.nomeFile.equals(other.getNomeFile()))) &&
-            ((this.digest==null && other.getDigest()==null) || 
-             (this.digest!=null &&
-              this.digest.equals(other.getDigest()))) &&
+            ((this.digests==null && other.getDigests()==null) || 
+             (this.digests!=null &&
+              java.util.Arrays.equals(this.digests, other.getDigests()))) &&
             ((this.esito==null && other.getEsito()==null) || 
              (this.esito!=null &&
               this.esito.equals(other.getEsito()))) &&
@@ -148,8 +156,16 @@ public class StorageDocumentiDocumento  implements java.io.Serializable {
         if (getNomeFile() != null) {
             _hashCode += getNomeFile().hashCode();
         }
-        if (getDigest() != null) {
-            _hashCode += getDigest().hashCode();
+        if (getDigests() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getDigests());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getDigests(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
         }
         if (getEsito() != null) {
             _hashCode += getEsito().hashCode();
@@ -179,10 +195,11 @@ public class StorageDocumentiDocumento  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("digest");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://www.depositolegale.it/storage", "digest"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(false);
+        elemField.setFieldName("digests");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://www.depositolegale.it/storage", "digests"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.depositolegale.it/storage", ">>>>storage>documenti>documento>digests"));
+        elemField.setNillable(true);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("esito");

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.bncf.magazziniDigitali.demoni.clientServices</groupId>
   <artifactId>MagazziniDigitaliDemoniClientServices</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <properties>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>

@@ -37,7 +37,7 @@ public abstract class MDDemoniThred extends Thread {
 	@Override
 	public void run() {
 		try {
-			log.info("Start Demone ["+getName()+"]");
+			log.info("\n"+"Start Demone ["+getName()+"]");
 			while (running) {
 				execute();
 				if (testMode|| ! repeater || !running){
@@ -50,7 +50,7 @@ public abstract class MDDemoniThred extends Thread {
 				}
 			}
 			finalize();
-			log.info("Stop Demone ["+getName()+"]");
+			log.info("\n"+"Stop Demone ["+getName()+"]");
 		} catch (NumberFormatException e) {
 			log.error(e.getMessage(), e);
 		} catch (ConfigurationException e) {

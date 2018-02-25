@@ -74,7 +74,7 @@ class ExecuteProcer extends Thread {
 				input += (input.equals("")?"Name: "+name+"\tId: "+id+"\n":"\n")+val;
 			}
 			if (!input.equals("")){
-				log.debug(input);
+				log.debug("\n"+input);
 			}
 
 			while ((val = errReader.readLine()) != null) {
@@ -85,16 +85,16 @@ class ExecuteProcer extends Thread {
 				}
 			}
 			if (!error.equals("")){
-				log.error(error);
+				log.error("\n"+error);
 			}
 
             exit = process.waitFor();
             
             if (exit==0){
             	esito=true;
-            	log.debug("Name: "+name+"\tId: "+id+"\n"+"Esito positivo");
+            	log.debug("\n"+"Name: "+name+"\tId: "+id+"\n"+"Esito positivo");
             } else {
-            	log.error("Name: "+name+"\tId: "+id+"\n"+"Esito Negattivo ["+exit+"]");
+            	log.error("\n"+"Name: "+name+"\tId: "+id+"\n"+"Esito Negattivo ["+exit+"]");
             }
             dStop = new GregorianCalendar();
         } catch (InterruptedException ignore) {

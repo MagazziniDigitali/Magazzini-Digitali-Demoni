@@ -35,7 +35,7 @@ public class MDDemoniValidate {
 			throws MDDemoniException {
 		OggettoDigitaleValidate odBusiness = null;
 
-		log.debug("Eseguo la Validazione ");
+		log.debug("\n"+"Eseguo la Validazione ");
 
 		try {
 			if (params != null && params.size()==1){
