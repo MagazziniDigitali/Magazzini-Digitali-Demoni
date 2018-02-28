@@ -168,6 +168,9 @@ public class JGeoReplica extends JobExecute {
 					);
 		} catch (HibernateUtilException e) {
 			throw e;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw e;
 		} finally {
 			log.debug("\n"+"Fine della Geo replica ID: "+id);
 		}

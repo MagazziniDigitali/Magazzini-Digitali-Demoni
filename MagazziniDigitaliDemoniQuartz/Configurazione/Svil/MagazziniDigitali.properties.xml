@@ -16,4 +16,42 @@
     <entry key="software.GeoReplica.password">m@9@221n1</entry>
     <entry key="software.GeoReplica.quartz">quartzGeoReplica.properties</entry>
 
+    <entry key="software.SolrIndex.login">DQ_SolrIndex_MD</entry>
+    <entry key="software.SolrIndex.password">m@9@221n1</entry>
+    <entry key="software.SolrIndex.quartz">quartzSolrIndex.properties</entry>
+    <entry key="demoni.Publish.mets.xslTransf.dc">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/xsl/Mets2MD.xsl</entry>
+
+    <entry key="software.GenPackagesPremis.login">DQ_GenPackagesPremis_MD</entry>
+    <entry key="software.GenPackagesPremis.password">m@9@221n1</entry>
+    <entry key="software.GenPackagesPremis.quartz">quartzGenPackagesPremis.properties</entry>
+    <entry key="genPackagesPremis.test">true</entry>
+    <entry key="genPackagesPremis.cronHour">3</entry>
+    <entry key="genPackagesPremis.cronMinute">0</entry>
+
+    <entry key="software.GenRegistroIngressi.login">DQ_GenRegistroIngresso_MD</entry>
+    <entry key="software.GenRegistroIngressi.password">m@9@221n1</entry>
+    <entry key="software.GenRegistroIngressi.quartz">quartzGenRegistroIngresso.properties</entry>
+    <entry key="genRegistroIngressi.test">true</entry>
+    <entry key="genRegistroIngressi.cronHour">4</entry>
+    <entry key="genRegistroIngressi.cronMinute">0</entry>
+
+    <entry key="software.GenTicket.login">DQ_GenTicket_MD</entry>
+    <entry key="software.GenTicket.password">m@9@221n1</entry>
+    <entry key="software.GenTicket.quartz">quartzGenTicket.properties</entry>
+    <entry key="genTicket.test">true</entry>
+    <entry key="genTicket.cronHour">5</entry>
+    <entry key="genTicket.cronMinute">0</entry>
+
+    <entry key="software.Validate.login">DQ_Validate_MD</entry>
+    <entry key="software.Validate.password">m@9@221n1</entry>
+    <entry key="software.Validate.quartz">quartzValidate.properties</entry>
+    <entry key="demoni.Validate.json.schema">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/schema/Mets2MD.xsl</entry>
+
+    <entry key="software.Publish.login">DQ_Publish_MD</entry>
+    <entry key="software.Publish.password">m@9@221n1</entry>
+    <entry key="software.Publish.quartz">quartzPublish.properties</entry>
+
+    <entry key="software.VerificaPreRegistrazione.login">DQ_VerificaPreRegistrazione_MD</entry>
+    <entry key="software.VerificaPreRegistrazione.password">m@9@221n1</entry>
+    <entry key="software.VerificaPreRegistrazione.quartz">quartzVerificaPreRegistrazione.properties</entry>
 </properties>

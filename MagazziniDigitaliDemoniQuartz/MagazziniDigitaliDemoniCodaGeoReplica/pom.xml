@@ -83,7 +83,7 @@
              						<tasks>
              							<scp 
              								localFile="${project.basedir}/target/MagazziniDigitaliDemoniCodaGeoReplica.jar"
-                							remoteToFile="tmcupload@172.18.3.6:/mnt/Applicativi/tmp" verbose="true"
+                							remoteToFile="tmcupload@172.17.1.11:/mnt/Applicativi/tmp" verbose="true"
                 							password="tmcupload" trust="true">
 								        </scp>
              						</tasks>

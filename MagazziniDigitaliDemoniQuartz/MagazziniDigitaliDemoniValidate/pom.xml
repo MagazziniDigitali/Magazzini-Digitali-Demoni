@@ -7,7 +7,7 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.validate</groupId>
   <artifactId>MagazziniDigitaliDemoniValidate</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -21,7 +21,7 @@
   		<artifactId>
   			MagazziniDigitaliBusinessLogicValidate
   		</artifactId>
-  		<version>2.0.17</version>
+  		<version>2.0.18</version>
   	</dependency>
   </dependencies>
 	<build>
