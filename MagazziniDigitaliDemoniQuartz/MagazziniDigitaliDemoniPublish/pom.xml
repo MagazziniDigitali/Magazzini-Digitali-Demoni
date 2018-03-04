@@ -7,7 +7,7 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.publish</groupId>
   <artifactId>MagazziniDigitaliDemoniPublish</artifactId>
-  <version>2.1.1</version>
+  <version>2.1.2</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -19,7 +19,7 @@
   			it.bncf.magazziniDigitali.businessLogic.publish
   		</groupId>
   		<artifactId>MagazziniDigitaliBusinessLogicPublish</artifactId>
-  		<version>2.0.17</version>
+  		<version>2.0.18</version>
   	</dependency>
   </dependencies>
 	<build>
