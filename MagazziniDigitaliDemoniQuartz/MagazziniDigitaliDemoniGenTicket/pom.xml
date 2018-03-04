@@ -7,7 +7,7 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.genTicket</groupId>
   <artifactId>MagazziniDigitaliDemoniGenTicket</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -19,7 +19,7 @@
   			it.bncf.magazziniDigitali.businessLogic.ticket
   		</groupId>
   		<artifactId>MagazziniDigitaliBusinessLogicTicket</artifactId>
-  		<version>2.0.17</version>
+  		<version>2.0.18</version>
   	</dependency>
   </dependencies>
 	<build>

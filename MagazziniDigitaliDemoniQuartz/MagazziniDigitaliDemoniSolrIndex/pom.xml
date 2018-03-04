@@ -7,7 +7,7 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.solrIndex</groupId>
   <artifactId>MagazziniDigitaliDemoniSolrIndex</artifactId>
-  <version>2.1.1</version>
+  <version>2.1.2</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -19,7 +19,7 @@
   			it.bncf.magazziniDigitali.businessLogic.solr
   		</groupId>
   		<artifactId>MagazziniDigitaliBusinessLogicSolr</artifactId>
-  		<version>2.0.18</version>
+  		<version>2.0.19</version>
   	</dependency>
   </dependencies>
 	<build>
@@ -83,7 +83,7 @@
              						<tasks>
              							<scp 
              								localFile="${project.basedir}/target/MagazziniDigitaliDemoniSolrIndex.jar"
-                							remoteToFile="tmcupload@172.17.1.11:/mnt/Applicativi/tmp" verbose="true"
+                							remoteToFile="tmcupload@172.18.3.6:/mnt/Applicativi/tmp" verbose="true"
                 							password="tmcupload" trust="true">
 								        </scp>
              						</tasks>
