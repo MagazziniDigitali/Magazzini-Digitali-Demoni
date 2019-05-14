@@ -40,9 +40,10 @@ public abstract class MDDemoniQuartzTools extends QuartzScheduler {
 	 * @param closeSocket
 	 * @throws SchedulerException
 	 */
-	public MDDemoniQuartzTools(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket, boolean reScheduling)
+	public MDDemoniQuartzTools(boolean processing, String fileQuartz, Integer socketPort, 
+			boolean closeSocket, boolean reScheduling, boolean quartzScheduler)
 			throws SchedulerException {
-		super(processing, fileQuartz, socketPort, closeSocket, reScheduling);
+		super(processing, fileQuartz, socketPort, closeSocket, reScheduling, quartzScheduler);
 	}
 
 	/**

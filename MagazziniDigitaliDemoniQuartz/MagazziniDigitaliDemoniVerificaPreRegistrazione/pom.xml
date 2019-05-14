@@ -7,7 +7,7 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.verificaPreRegistrazione</groupId>
   <artifactId>MagazziniDigitaliDemoniVerificaPreRegistrazione</artifactId>
-  <version>2.1.1</version>
+  <version>2.1.2</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -21,7 +21,7 @@
   		<artifactId>
   			MagazziniDigitaliVerificaPreRegistrazione
   		</artifactId>
-  		<version>2.0.9</version>
+  		<version>2.0.10</version>
   	</dependency>
   </dependencies>
 	<build>
