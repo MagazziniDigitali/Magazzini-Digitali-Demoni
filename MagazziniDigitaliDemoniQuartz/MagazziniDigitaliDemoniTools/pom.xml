@@ -3,16 +3,16 @@
   <parent>
     <groupId>it.bncf.magazziniDigitali.demoni</groupId>
     <artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-    <version>2.0.24</version>
+    <version>3.0.0</version>
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
   <artifactId>MagazziniDigitaliDemoniTools</artifactId>
-  <version>2.1.1</version>
+  <version>3.0.0</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.services.client</groupId>
   		<artifactId>MagazziniDigitaliServicesClient</artifactId>
-  		<version>2.0.20</version>
+  		<version>3.0.1</version>
   	</dependency>
   </dependencies>
 	<build>

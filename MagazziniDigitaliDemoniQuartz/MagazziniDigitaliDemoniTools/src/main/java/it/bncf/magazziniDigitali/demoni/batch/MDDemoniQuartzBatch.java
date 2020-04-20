@@ -3,7 +3,8 @@
  */
 package it.bncf.magazziniDigitali.demoni.batch;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.SchedulerException;
 
 import it.bncf.magazziniDigitali.configuration.exception.MDConfigurationException;
@@ -20,7 +21,7 @@ public abstract class MDDemoniQuartzBatch <MDQ extends MDDemoniQuartzTools> {
 
 	public static MDConfiguration mdConfiguration = null;
 
-	private Logger log = Logger.getLogger(MDDemoniQuartzBatch.class);
+	private Logger log = LogManager.getLogger(MDDemoniQuartzBatch.class);
 
 	private String nomeSW = null;
 
@@ -82,7 +83,8 @@ public abstract class MDDemoniQuartzBatch <MDQ extends MDDemoniQuartzTools> {
 						Configuration.getValue("software."+nomeSW+".quartz"), 
 						socketPort, 
 						closeSocket, 
-						rescheduling);
+						rescheduling,
+						true);
 				if (!closeSocket){
 					if (!rescheduling){
 						if (scheduling){
@@ -112,7 +114,7 @@ public abstract class MDDemoniQuartzBatch <MDQ extends MDDemoniQuartzTools> {
 
 	protected abstract MDQ initScheduler(boolean processing, 
 			String fileQuartz, Integer socketPort, boolean closeSocket,
-			boolean reScheduling) throws SchedulerException;
+			boolean reScheduling, boolean quartzScheduler) throws SchedulerException;
 
 	protected static void printHelp(){
 		System.out.println("E' necessario indicare i seguenti parametri:");
