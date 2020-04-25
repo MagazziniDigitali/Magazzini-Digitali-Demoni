@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+	<Properties>
+		<Property name="basePath">${sys:catalina.home}/logs/MagazziniDigitali3/Services</Property>
+	</Properties>
+
+	<Appenders>
+		<RollingFile name="fileLogger"
+			fileName="${basePath}/Output.log"
+			filePattern="${basePath}/Output-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="it.bncf" level="error"
+			additivity="true">
+			<appender-ref ref="fileLogger" level="error" />
+		</Logger>
+		<Logger name="mx.randalf" level="error"
+			additivity="true">
+			<appender-ref ref="fileLogger" level="error" />
+		</Logger>
+		<Logger name="org.quartz" level="error"
+			additivity="true">
+			<appender-ref ref="fileLogger" level="error" />
+		</Logger>
+		<Root level="error" additivity="false">
+			<appender-ref ref="console" />
+		</Root>
+	</Loggers>
+</Configuration>

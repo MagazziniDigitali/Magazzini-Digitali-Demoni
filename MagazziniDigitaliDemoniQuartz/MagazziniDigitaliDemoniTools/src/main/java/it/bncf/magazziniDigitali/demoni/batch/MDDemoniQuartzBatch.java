@@ -3,6 +3,8 @@
  */
 package it.bncf.magazziniDigitali.demoni.batch;
 
+import java.io.File;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.quartz.SchedulerException;
@@ -39,9 +41,11 @@ public abstract class MDDemoniQuartzBatch <MDQ extends MDDemoniQuartzTools> {
 		boolean scheduling = false;
 		boolean processing = false;
 		boolean rescheduling = false;
+		File fConfig = null;
 
 		try {
-			mdConfiguration = new MDConfiguration(nomeSW, "file:///"+args[0]);
+			fConfig = new File(args[0]);
+			mdConfiguration = new MDConfiguration(nomeSW, "file:///"+fConfig.getAbsolutePath());
 			if (mdConfiguration.getSoftware().getErrorMsg() ==null ||
 					mdConfiguration.getSoftware().getErrorMsg().length==0){
 				
@@ -60,6 +64,11 @@ public abstract class MDDemoniQuartzBatch <MDQ extends MDDemoniQuartzTools> {
 					System.exit(-1);
 				}
 
+				if (Configuration.getValue("software."+nomeSW+".scheduling") != null &&
+						Configuration.getValue("software."+nomeSW+".scheduling").equalsIgnoreCase("false")) {
+					scheduling = false;
+				}
+				
 				try {
 					socketPort = mdConfiguration.getSoftwareConfigInteger("socketPort");
 				} catch (MDConfigurationException e) {
@@ -79,7 +88,8 @@ public abstract class MDDemoniQuartzBatch <MDQ extends MDDemoniQuartzTools> {
 					e.printStackTrace();
 				}
 				mdq = initScheduler(processing, 
-						args[0]+"/"+
+						(fConfig.isFile()?fConfig.getParentFile().getAbsolutePath():fConfig.getAbsolutePath())+
+						File.separator+
 						Configuration.getValue("software."+nomeSW+".quartz"), 
 						socketPort, 
 						closeSocket, 

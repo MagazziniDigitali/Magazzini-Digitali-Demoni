@@ -32,8 +32,8 @@ public class MDDemoniQuartzValidateBatch extends MDDemoniQuartzBatch<MDDemoniQua
 
 	@Override
 	protected MDDemoniQuartz initScheduler(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket,
-			boolean reScheduling) throws SchedulerException {
-		return new MDDemoniQuartz(processing, fileQuartz, socketPort, closeSocket, reScheduling);
+			boolean reScheduling, boolean quartzScheduler) throws SchedulerException {
+		return new MDDemoniQuartz(processing, fileQuartz, socketPort, closeSocket, reScheduling,  quartzScheduler);
 	}
 
 }

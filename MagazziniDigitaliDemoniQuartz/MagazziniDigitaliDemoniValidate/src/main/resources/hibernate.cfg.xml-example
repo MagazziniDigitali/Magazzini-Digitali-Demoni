@@ -1,23 +1,22 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-"-//Hibernate/Hibernate Configuration DTD//EN"
-"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- <property name="connection.datasource">java:comp/env/jdbc/MD_CD</property> 
-			<property name="show_sql">false</property> <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property> -->
 
-		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-		<property name="hibernate.connection.password">Magazzini</property>
-		<property name="hibernate.connection.url">jdbc:mysql://dbservertest.bncf.lan:3306/MagazziniDigitaliSviluppo?autoReconnect=true&amp;serverTimezone=UTC</property>
-		<property name="hibernate.connection.username">MD_Sviluppo</property>
+		<!--  Credenziali per l'accesso al Database SQL -->
+		<property name="hibernate.connection.url">jdbc:mysql://<Nome server SQL>:<Porta server SQL>/<Nome database>?autoReconnect=true&amp;serverTimezone=UTC</property>
+		<property name="hibernate.connection.username"><Utente Database></property>
+		<property name="hibernate.connection.password"><Password Database></property>
+
 		<property name="hibernate.connection.validationQuery">select 1</property>
-
 		<property name="connection.autoReconnect">true</property>
 		<property name="connection.autoReconnectForPools">true</property>
 		<property name="connection.is-connection-validation-required">true</property>
 		<property name="hibernate.connection.autoReconnect">true</property>
 
+		<!--  Configurazione Driver MySql  -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
@@ -31,15 +30,24 @@
 		<property name="hibernate.c3p0.testWhileIdle">true</property>
 		<property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
 
+		<!-- Debugin script SQL -->
 		<property name="show_sql">false</property>
 		<property name="format_sql">false</property>
 		<property name="use_sql_comments">false</property>
 
+		<!-- Azione da esegiore al momento del promo accesso al Database.
+		update: aggiorna la struttura del database creando la struttura del materiale non esistente e modificando quelle esistenti
+		basandosi sulle informazioni presenti sui files hbm.xml -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+
+		<!-- Lista delle tabelle che compongono il database -->
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/Comuni.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDArchive.hbm.xml" />
-		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDClient.hbm.xml" />
 		<mapping
 			resource="it/bncf/magazziniDigitali/database/entity/MDCompositionLevel.hbm.xml" />
+		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDContatori.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDEvent.hbm.xml" />
 		<mapping
 			resource="it/bncf/magazziniDigitali/database/entity/MDFilesTmp.hbm.xml" />
@@ -50,6 +58,7 @@
 		<mapping
 			resource="it/bncf/magazziniDigitali/database/entity/MDModalitaAccesso.hbm.xml" />
 		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDNodi.hbm.xml" />
+		<mapping resource="it/bncf/magazziniDigitali/database/entity/MDPreRegistrazione.hbm.xml" />
 		<mapping
 			resource="it/bncf/magazziniDigitali/database/entity/MDRegistroIngresso.hbm.xml" />
 		<mapping

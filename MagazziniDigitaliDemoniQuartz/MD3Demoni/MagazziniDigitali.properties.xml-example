@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-    <comment>Fie di configurazione del progetto MD Versione 2.x.x</comment>
+    <comment>Fie di configurazione del progetto MD Versione 3.x.x</comment>
 
     <!-- URL da contattare per poter fare l'autenticazione del Software -->
-    <entry key="software.URLAuthentication">http://localhost:8080/MagazziniDigitaliServices/services/AuthenticationSoftwarePort?wsdl</entry>
+    <entry key="software.URLAuthentication">http://<Url Server Services>:<Porta Server Services>/MagazziniDigitaliServices/services/AuthenticationSoftwarePort?wsdl</entry>
 
-    <!-- Configurazione Software Interfaccia Api -->
+    <!-- Configurazione Software Demoni -->
 
     <entry key="software.CodaGeoReplica.login">DQ_CodaGeoReplica_MD</entry>
     <entry key="software.CodaGeoReplica.password">m@9@221n1</entry>
@@ -19,7 +19,7 @@
     <entry key="software.SolrIndex.login">DQ_SolrIndex_MD</entry>
     <entry key="software.SolrIndex.password">m@9@221n1</entry>
     <entry key="software.SolrIndex.quartz">quartzSolrIndex.properties</entry>
-    <entry key="demoni.Publish.mets.xslTransf.dc">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/xsl/Mets2MD.xsl</entry>
+    <entry key="demoni.Publish.mets.xslTransf.dc"><Path Files Configurazione>/xsl/Mets2MD.xsl</entry>
 
     <entry key="software.GenPackagesPremis.login">DQ_GenPackagesPremis_MD</entry>
     <entry key="software.GenPackagesPremis.password">m@9@221n1</entry>
@@ -44,8 +44,9 @@
 
     <entry key="software.Validate.login">DQ_Validate_MD</entry>
     <entry key="software.Validate.password">m@9@221n1</entry>
+    <entry key="software.Validate.scheduling">true</entry>
     <entry key="software.Validate.quartz">quartzValidate.properties</entry>
-    <entry key="demoni.Validate.json.schema">/Users/massi/Desktop/Lavoro/Sorgenti/Bncf/MagazziniDigitaliDemoni/MagazziniDigitaliDemoni/configurazione/schema/Mets2MD.xsl</entry>
+    <entry key="demoni.Validate.json.schema"><Path Files Configurazione>/xsl/Mets2MD.xsl</entry>
 
     <entry key="software.Publish.login">DQ_Publish_MD</entry>
     <entry key="software.Publish.password">m@9@221n1</entry>

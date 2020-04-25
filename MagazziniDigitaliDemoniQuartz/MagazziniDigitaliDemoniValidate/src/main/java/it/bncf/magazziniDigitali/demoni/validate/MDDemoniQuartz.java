@@ -5,7 +5,8 @@ package it.bncf.magazziniDigitali.demoni.validate;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.quartz.SchedulerException;
 
@@ -23,7 +24,7 @@ import mx.randalf.hibernate.exception.HibernateUtilException;
  */
 public class MDDemoniQuartz extends MDDemoniQuartzTools {
 
-	private static Logger log = Logger.getLogger(MDDemoniQuartz.class);
+	private static Logger log = LogManager.getLogger(MDDemoniQuartz.class);
 
 	/**
 	 * @param processiong
@@ -32,9 +33,9 @@ public class MDDemoniQuartz extends MDDemoniQuartzTools {
 	 * @param closeSocket
 	 * @throws SchedulerException
 	 */
-	public MDDemoniQuartz(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket, boolean reScheduling)
+	public MDDemoniQuartz(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket, boolean reScheduling, boolean quartzScheduler)
 			throws SchedulerException {
-		super(processing, fileQuartz, socketPort, closeSocket, reScheduling);
+		super(processing, fileQuartz, socketPort, closeSocket, reScheduling, quartzScheduler);
 	}
 
 	/**
