@@ -41,8 +41,8 @@ org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDele
 # Configure Datasources  
 #============================================================================
 
-org.quartz.dataSource.myDS.driver: com.mysql.jdbc.Driver
-org.quartz.dataSource.myDS.URL: jdbc:mysql://<Nome database Server>:<Porta database Serveer>/<Nome Database>
+org.quartz.dataSource.myDS.driver: com.mysql.cj.jdbc.Driver
+org.quartz.dataSource.myDS.URL: jdbc:mysql://<Nome database Server>:<Porta database Serveer>/<Nome Database>?autoReconnect=true&serverTimezone=UTC
 
 org.quartz.dataSource.myDS.user: <Username Database>
 org.quartz.dataSource.myDS.password: <Password Database>
