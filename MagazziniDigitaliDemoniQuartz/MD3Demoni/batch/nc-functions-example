@@ -1,0 +1,76 @@
+JAVA_BIN=<Path in cui è stato installato Java>
+MD_CONF=$MD_HOME/MD3Demoni
+MD_LOGS=$MD_HOME/logs
+
+start() {
+  echo "In partenza $SERVICE_NAME ..."
+  if [ ! -d "$MD_LOGS" ]; then
+    mkdir "$MD_LOGS"
+  fi
+
+  cd $MD_HOME
+  if [ ! -f $PID_PATH_NAME ]; then
+    nohup $JAVA_BIN/java  -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=$SERVICE_PORT \
+                  -Dmail.smtp.starttls.enable=true \
+                  -Dlog4j.configuration=file://$MD_CONF/log4j$SERVICE_NAME.xml \
+                  -Dlog4j.configurationFile=file://$MD_CONF/log4j2$SERVICE_NAME.xml \
+                  -jar ./MagazziniDigitaliDemoniValidate.jar \
+                  "$MD_CONF/MagazziniDigitali.properties.xml" \
+		  start \
+                  >$MD_LOGS/$SERVICE_NAME.Start.out 2>&1 &
+    echo $! > $PID_PATH_NAME
+    echo "$SERVICE_NAME partito ..."
+  else
+    echo "$SERVICE_NAME è già in esecuzione ..."
+  fi
+}
+
+stop() {
+  if [ -f $PID_PATH_NAME ]; then
+    PID=$(cat $PID_PATH_NAME);
+    echo "$SERVICE_NAME spegnimento ..."
+    cd $MD_HOME
+    nohup $JAVA_BIN/java \
+                  -Dmail.smtp.starttls.enable=true \
+                  -Dlog4j.configuration=file://$MD_CONF/log4j$SERVICE_NAME.xml \
+                  -Dlog4j.configurationFile=file://$MD_CONF/log4j2$SERVICE_NAME.xml \
+                  -jar ./MagazziniDigitaliDemoniValidate.jar \
+                  "$MD_CONF/MagazziniDigitali.properties.xml" \
+		  stop \
+                  >$MD_LOGS/$SERVICE_NAME.Stop.out 2>&1 &
+    echo "$SERVICE_NAME fermato ..."
+    rm $PID_PATH_NAME
+  else
+    echo "$SERVICE_NAME non in esecuzione ..."
+  fi
+}
+
+rescheduling() {
+  if [ -f $PID_PATH_NAME ]; then
+    PID=$(cat $PID_PATH_NAME);
+    echo "$SERVICE_NAME rischedulazione ..."
+    cd $MD_HOME
+    nohup $JAVA_BIN/java \
+                  -Dmail.smtp.starttls.enable=true \
+                  -Dlog4j.configuration=file://$MD_CONF/log4j$SERVICE_NAME.xml \
+                  -Dlog4j.configurationFile=file://$MD_CONF/log4j2$SERVICE_NAME.xml \
+                  -jar ./MagazziniDigitaliDemoniValidate.jar \
+                  "$MD_CONF/MagazziniDigitali.properties.xml" \
+		  rescheduling \
+                  >$MD_LOGS/$SERVICE_NAME.Rescheduling.out 2>&1 &
+    echo "$SERVICE_NAME fine rischedulazione ..."
+    rm $PID_PATH_NAME
+  else
+    echo "$SERVICE_NAME non in esecuzione ..."
+  fi
+}
+
+status() {
+  echo "Verifica dello stato di $SERVICE_NAME ..."
+  if [ -f $PID_PATH_NAME ]; then
+    echo "Il servizio è in esecuzione"
+  else
+    echo "Il servizio è interrotto"
+  fi
+  echo
+}

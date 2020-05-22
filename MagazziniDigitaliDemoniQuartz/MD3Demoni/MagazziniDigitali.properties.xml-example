@@ -19,7 +19,7 @@
     <entry key="software.SolrIndex.login">DQ_SolrIndex_MD</entry>
     <entry key="software.SolrIndex.password">m@9@221n1</entry>
     <entry key="software.SolrIndex.quartz">quartzSolrIndex.properties</entry>
-    <entry key="demoni.Publish.mets.xslTransf.dc"><Path Files Configurazione>/xsl/Mets2MD.xsl</entry>
+    <entry key="demoni.Publish.mets.xslTransf.dc">/xsl/Mets2MD.xsl</entry>
 
     <entry key="software.GenPackagesPremis.login">DQ_GenPackagesPremis_MD</entry>
     <entry key="software.GenPackagesPremis.password">m@9@221n1</entry>
