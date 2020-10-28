@@ -7,12 +7,12 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.geopReplica</groupId>
   <artifactId>MagazziniDigitaliDemoniGeoReplica</artifactId>
-  <version>2.1.1</version>
+  <version>3.0.0</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
   		<artifactId>MagazziniDigitaliDemoniTools</artifactId>
-  		<version>2.1.0</version>
+  		<version>3.0.2</version>
   	</dependency>
   	<dependency>
   		<groupId>
@@ -21,7 +21,7 @@
   		<artifactId>
   			MagazziniDigitaliBusinessLogicGeoReplica
   		</artifactId>
-  		<version>2.0.19</version>
+  		<version>3.0.0</version>
   	</dependency>
   </dependencies>
 	<build>

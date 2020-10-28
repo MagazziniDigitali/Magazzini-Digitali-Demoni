@@ -2,7 +2,8 @@ package it.bncf.magazziniDigitali.demoni.quartz.geoReplica;
 
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -13,7 +14,7 @@ import mx.randalf.quartz.job.JobExecute;
 
 public class JCodaGeoReplica extends JobExecute {
 
-	private Logger log = Logger.getLogger(JCodaGeoReplica.class);
+	private Logger log = LogManager.getLogger(JCodaGeoReplica.class);
 
 	public JCodaGeoReplica() {
 	}

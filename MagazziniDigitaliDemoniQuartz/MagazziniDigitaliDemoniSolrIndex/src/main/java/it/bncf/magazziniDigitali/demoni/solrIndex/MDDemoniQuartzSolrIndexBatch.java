@@ -5,6 +5,8 @@ package it.bncf.magazziniDigitali.demoni.solrIndex;
 
 import org.quartz.SchedulerException;
 
+import com.amazonaws.SDKGlobalConfiguration;
+
 import it.bncf.magazziniDigitali.demoni.batch.MDDemoniQuartzBatch;
 
 /**
@@ -22,7 +24,10 @@ public class MDDemoniQuartzSolrIndexBatch extends MDDemoniQuartzBatch<MDDemoniQu
 	 */
 	public static void main(String[] args) {
 		MDDemoniQuartzSolrIndexBatch mdDemoniQuartzBatch = null;
-		if (args.length==2){
+		
+		System.setProperty(SDKGlobalConfiguration.DISABLE_CERT_CHECKING_SYSTEM_PROPERTY, "true");
+
+		if (args.length == 2) {
 			mdDemoniQuartzBatch = new MDDemoniQuartzSolrIndexBatch();
 			mdDemoniQuartzBatch.esegui(args);
 		} else {
@@ -31,9 +36,9 @@ public class MDDemoniQuartzSolrIndexBatch extends MDDemoniQuartzBatch<MDDemoniQu
 	}
 
 	@Override
-	protected MDDemoniQuartz initScheduler(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket,
-			boolean reScheduling) throws SchedulerException {
-		return new MDDemoniQuartz(processing, fileQuartz, socketPort, closeSocket, reScheduling);
+	protected MDDemoniQuartz initScheduler(boolean processing, String fileQuartz, Integer socketPort,
+			boolean closeSocket, boolean reScheduling, boolean quartzScheduler) throws SchedulerException {
+		return new MDDemoniQuartz(processing, fileQuartz, socketPort, closeSocket, reScheduling, quartzScheduler);
 	}
 
 }

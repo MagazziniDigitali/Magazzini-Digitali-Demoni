@@ -3,7 +3,8 @@
  */
 package it.bncf.magazziniDigitali.demoni.quartz.solrIndex;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -17,7 +18,7 @@ import mx.randalf.quartz.job.JobExecute;
  */
 public class JSolrIndex extends JobExecute {
 
-	private Logger log = Logger.getLogger(JSolrIndex.class);
+	private Logger log = LogManager.getLogger(JSolrIndex.class);
 
 	/**
 	 * 

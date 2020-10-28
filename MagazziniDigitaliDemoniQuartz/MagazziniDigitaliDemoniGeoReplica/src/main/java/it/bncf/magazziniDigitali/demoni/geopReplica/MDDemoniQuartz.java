@@ -3,7 +3,8 @@
  */
 package it.bncf.magazziniDigitali.demoni.geopReplica;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.quartz.SchedulerException;
 
@@ -17,7 +18,7 @@ import mx.randalf.configuration.exception.ConfigurationException;
  */
 public class MDDemoniQuartz extends MDDemoniQuartzTools {
 
-	private static Logger log = Logger.getLogger(MDDemoniQuartz.class);
+	private static Logger log = LogManager.getLogger(MDDemoniQuartz.class);
 
 	/**
 	 * @param processiong
@@ -26,9 +27,9 @@ public class MDDemoniQuartz extends MDDemoniQuartzTools {
 	 * @param closeSocket
 	 * @throws SchedulerException
 	 */
-	public MDDemoniQuartz(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket, boolean reScheduling)
-			throws SchedulerException {
-		super(processing, fileQuartz, socketPort, closeSocket, reScheduling);
+	public MDDemoniQuartz(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket,
+			boolean reScheduling, boolean quartzScheduler) throws SchedulerException {
+		super(processing, fileQuartz, socketPort, closeSocket, reScheduling, quartzScheduler);
 	}
 
 	/**
@@ -37,25 +38,21 @@ public class MDDemoniQuartz extends MDDemoniQuartzTools {
 	@Override
 	public void scheduling() throws SchedulerException {
 
+		while (!this.isShutdown()) {
 
-		while(!this.isShutdown()){
-			
 			try {
-				
-				addScheduler(JGeoReplica.class, 
-					"GeoReplica", 
-					null, 
-					"geoReplica", null);
+
+				addScheduler(JGeoReplica.class, "GeoReplica", null, "geoReplica", null);
 			} catch (HibernateException e) {
-				log.error(e.getMessage(),e);
+				log.error(e.getMessage(), e);
 			} catch (ConfigurationException e) {
 				e.printStackTrace();
-				log.error(e.getMessage(),e);
+				log.error(e.getMessage(), e);
 			}
 			try {
 				Thread.sleep(60000);
 			} catch (InterruptedException e) {
-				log.error(e.getMessage(),e);
+				log.error(e.getMessage(), e);
 			}
 		}
 	}
@@ -65,12 +62,11 @@ public class MDDemoniQuartz extends MDDemoniQuartzTools {
 	 */
 	@Override
 	public void reScheduling() throws SchedulerException {
-		
+
 		try {
-			addReScheduler(JGeoReplica.class, 
-					"GeoReplica");
+			addReScheduler(JGeoReplica.class, "GeoReplica");
 		} catch (HibernateException e) {
-			log.error(e.getMessage(),e);
+			log.error(e.getMessage(), e);
 		}
 	}
 
