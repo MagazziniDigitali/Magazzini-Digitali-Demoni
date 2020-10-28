@@ -22,7 +22,7 @@ public class MDDemoniQuartzGenTicketBatch extends MDDemoniQuartzBatch<MDDemoniQu
 	 */
 	public static void main(String[] args) {
 		MDDemoniQuartzGenTicketBatch mdDemoniQuartzBatch = null;
-		if (args.length==2){
+		if (args.length == 2) {
 			mdDemoniQuartzBatch = new MDDemoniQuartzGenTicketBatch();
 			mdDemoniQuartzBatch.esegui(args);
 		} else {
@@ -31,9 +31,9 @@ public class MDDemoniQuartzGenTicketBatch extends MDDemoniQuartzBatch<MDDemoniQu
 	}
 
 	@Override
-	protected MDDemoniQuartz initScheduler(boolean processing, String fileQuartz, Integer socketPort, boolean closeSocket,
-			boolean reScheduling) throws SchedulerException {
-		return new MDDemoniQuartz(processing, fileQuartz, socketPort, closeSocket, reScheduling);
+	protected MDDemoniQuartz initScheduler(boolean processing, String fileQuartz, Integer socketPort,
+			boolean closeSocket, boolean reScheduling, boolean quartzScheduler) throws SchedulerException {
+		return new MDDemoniQuartz(processing, fileQuartz, socketPort, closeSocket, reScheduling, quartzScheduler);
 	}
 
 }

@@ -4,11 +4,19 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
+    <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
 
     <!--  Credenziali per l'accesso al Database SQL -->
     <property name="hibernate.connection.url">jdbc:mysql://<Nome server SQL>:<Porta server SQL>/<Nome database>?autoReconnect=true&amp;serverTimezone=UTC</property>
     <property name="hibernate.connection.username"><Utente Database></property>
     <property name="hibernate.connection.password"><Password Database></property>
+
+    <property name="hibernate.connection.CharSet">utf8</property>
+	<property name="hibernate.connection.characterEncoding">utf8</property>
+	<property name="hibernate.connection.useUnicode">true</property>
+
+	<!-- Attivazione modulo c3p0 per hybernate -->
+	<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
 
     <property name="hibernate.connection.validationQuery">select 1</property>
     <property name="connection.autoReconnect">true</property>
@@ -23,9 +31,11 @@
     <!-- Quando una connessione inattiva viene rimosso dal pool (in seconda). 
       Sospensione di default: 0, non scadono mai. -->
     <property name="hibernate.c3p0.timeout">300</property>
+    
     <!-- tempo di inattività in secondi prima che una connessione viene convalidato 
       automaticamente. Sospensione di default: 0 -->
     <property name="hibernate.c3p0.idle_test_period">600</property>
+    
     <property name="hibernate.c3p0.preferredTestQuery">select 1</property>
     <property name="hibernate.c3p0.testWhileIdle">true</property>
     <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
@@ -40,30 +50,30 @@
     basandosi sulle informazioni presenti sui files hbm.xml -->
     <property name="hibernate.hbm2ddl.auto">update</property>
 
-    <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-
     <!-- Lista delle tabelle che compongono il database -->
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/Comuni.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDArchive.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDCompositionLevel.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDContatori.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDEvent.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDFilesTmp.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDFilesTmpError.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDIstituzione.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDModalitaAccesso.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDNodi.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDPreRegistrazione.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDRegistroIngresso.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDRegistroIngressoError.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDRigths.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDSoftware.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDSoftwareConfig.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDStato.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDTicket.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/MDUtenti.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/Province.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/Regioni.hbm.xml" />
-    <mapping resource="it/bncf/magazziniDigitali/database/entity/Stati.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/Comuni.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDArchive.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDCompositionLevel.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDConfigDefaults.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDConfigDefaultsRow.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDContatori.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDEvent.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDFilesTmp.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDFilesTmpError.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDIstituzione.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDModalitaAccesso.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDNodi.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDPreRegistrazione.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDRegistroIngresso.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDRegistroIngressoError.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDRigths.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDSoftware.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDSoftwareConfig.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDStato.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDTicket.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/MDUtenti.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/Province.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/Regioni.hbm.xml" />
+	<mapping resource="it/bncf/magazziniDigitali/database/entity/Stati.hbm.xml" />
   </session-factory>
 </hibernate-configuration>
