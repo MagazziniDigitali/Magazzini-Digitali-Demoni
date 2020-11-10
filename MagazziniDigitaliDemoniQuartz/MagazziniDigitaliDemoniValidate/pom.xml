@@ -1,113 +1,124 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>it.bncf.magazziniDigitali.demoni</groupId>
-    <artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-    <version>3.0.0</version>
-  </parent>
-  <groupId>it.bncf.magazziniDigitali.demoni.validate</groupId>
-  <artifactId>MagazziniDigitaliDemoniValidate</artifactId>
-  <version>3.0.2</version>
-  <dependencies>
-  	<dependency>
-  		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
-  		<artifactId>MagazziniDigitaliDemoniTools</artifactId>
-  		<version>3.0.2</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>it.bncf.magazziniDigitali.demoni</groupId>
+		<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
+		<version>3.0.0</version>
+	</parent>
+	<groupId>it.bncf.magazziniDigitali.demoni.validate</groupId>
+	<artifactId>MagazziniDigitaliDemoniValidate</artifactId>
+	<version>3.0.2</version>
+	<dependencies>
+		<dependency>
+			<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
+			<artifactId>MagazziniDigitaliDemoniTools</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>
   			it.bncf.magazziniDigitali.businessLogic.validate
   		</groupId>
-  		<artifactId>
+			<artifactId>
   			MagazziniDigitaliBusinessLogicValidate
   		</artifactId>
-  		<version>3.0.3</version>
-  	</dependency>
-  </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
-        <excludes>
-          <exclude>**/client_secret.json</exclude>
-          <exclude>**/hibernate.cfg.xml</exclude>
-          <exclude>**/log4j.xml</exclude>
-          <exclude>**/log4j.dtd</exclude>
-        </excludes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>it.bncf.magazziniDigitali.demoni.validate.MDDemoniQuartzValidateBatch</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <finalName>MagazziniDigitaliDemoniValidate</finalName>
-          <appendAssemblyId>false</appendAssemblyId>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id> 
-            <phase>package</phase> 
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-  <profiles>
-    <profile>
-      <id>distribution</id>
-      <properties>
-        <myAction>distribution</myAction>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy</id>
-                <phase>package</phase>
-                <configuration>
-                  <target>
-                    <echo>ANT TASK - copying files....</echo>
-                    <copy todir="${basedir}/../distribution" overwrite="true" flatten="true">
-                      <fileset dir="${basedir}/target" includes="MagazziniDigitaliDemoniValidate.jar" />
-                    </copy>
-                    <copy todir="${basedir}/../distribution" overwrite="true" flatten="true">
-                      <fileset dir="${basedir}/../MD3Demoni" includes="hibernate.cfg.xml-example" />
-                    </copy>
-                    <copy todir="${basedir}/../distribution/MD3Demoni" overwrite="true" flatten="true">
-                      <fileset dir="${basedir}/../MD3Demoni"
-                        includes="MagazziniDigitali.properties.xml-example,quartzValidate.properties-example,log4jValidate.xml,log4j2Validate.xml"/>
-                    </copy>
-                    <copy todir="${basedir}/../distribution/batch" overwrite="true" flatten="true">
-                      <fileset dir="${basedir}/../MD3Demoni/batch"
-                        includes="nc-functions-example,Validate.sh-example"/>
-                    </copy>
-                    <copy todir="${basedir}/../distribution/MD3Demoni/xsl" overwrite="true" flatten="true">
-                      <fileset dir="${basedir}/../MD3Demoni/xsl"
-                        includes="**/**"/>
-                    </copy>
-                  </target>
-                </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+			<version>3.0.3</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<excludes>
+					<exclude>**/client_secret.json</exclude>
+					<exclude>**/hibernate.cfg.xml</exclude>
+					<exclude>**/log4j.xml</exclude>
+					<exclude>**/log4j.dtd</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>it.bncf.magazziniDigitali.demoni.validate.MDDemoniQuartzValidateBatch</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<finalName>MagazziniDigitaliDemoniValidate</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>distribution</id>
+			<properties>
+				<myAction>distribution</myAction>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<id>copy</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<echo>ANT TASK - copying files....</echo>
+										<copy todir="${basedir}/../distribution" overwrite="true"
+											flatten="true">
+											<fileset dir="${basedir}/target"
+												includes="MagazziniDigitaliDemoniValidate.jar" />
+										</copy>
+										<copy todir="${basedir}/../distribution" overwrite="true"
+											flatten="true">
+											<fileset dir="${basedir}/../MD3Demoni"
+												includes="hibernate.cfg.xml-example" />
+										</copy>
+										<copy todir="${basedir}/../distribution/MD3Demoni"
+											overwrite="true" flatten="true">
+											<fileset dir="${basedir}/../MD3Demoni"
+												includes="MagazziniDigitali.properties.xml-example,quartzValidate.properties-example,log4jValidate.xml,log4j2Validate.xml" />
+										</copy>
+										<copy todir="${basedir}/../distribution/batch"
+											overwrite="true" flatten="true">
+											<fileset dir="${basedir}/../MD3Demoni/batch"
+												includes="nc-functions-example,Validate.sh-example" />
+										</copy>
+										<copy todir="${basedir}/../distribution/MD3Demoni/xsl"
+											overwrite="true" flatten="true">
+											<fileset dir="${basedir}/../MD3Demoni/xsl"
+												includes="**/**" />
+										</copy>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

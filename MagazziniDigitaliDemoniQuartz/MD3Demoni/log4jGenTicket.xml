@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <appender name="STDOUT" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+    <param name="File" value="./logs/MagazziniDigitali3/Demoni/GenTicket/stdOut.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"/>
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="DEBUG"/>
+      <param name="LevelMax" value="INFO"/>
+    </filter>
+  </appender>
+
+  <appender name="STDERR" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+    <param name="File" value="./logs/MagazziniDigitali3/Demoni/GenTicket/stdErr.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"/>
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="WARN"/>
+      <param name="LevelMax" value="FATAL"/>
+    </filter>
+  </appender>
+  <category name="it.bncf.magazziniDigitali">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="it.depositolegale">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="com.amazonaws">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.slf4j">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.apache.http">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.apache.axis">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.quartz.impl.StdSchedulerFactory">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="mx.randalf">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="com.mchange">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.jboss">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+
+  <category name="org.hibernate">
+    <level value="ERROR"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="STDERR"/>
+  </category>
+</log4j:configuration>

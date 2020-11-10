@@ -3,7 +3,7 @@
 # Configure Main Scheduler Properties  
 #============================================================================
 
-org.quartz.scheduler.instanceName: GenRegistroIngresso
+org.quartz.scheduler.instanceName: GenRegistroIngressi
 org.quartz.scheduler.instanceId: AUTO
 org.quartz.scheduler.rmi.export: false
 org.quartz.scheduler.rmi.proxy: false

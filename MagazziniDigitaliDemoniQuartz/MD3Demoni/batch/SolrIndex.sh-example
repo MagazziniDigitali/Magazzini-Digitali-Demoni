@@ -1,0 +1,46 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:                 SolrIndex
+# Required-Start:           $java
+# Required-Stop:            $java
+# Short-Description:        Start and stop Validate service.
+# Description:              Demone per la Validazione del Materiale
+# Default-Start:            2 3 4 5
+# Default-Stop:             0 1 6
+# Date-Creation:            -
+# Date-Last-Modification:   -
+# Author:                   -
+### END INIT INFO
+
+MD_HOME=<Path in cui è stato installato il programma>
+. $MD_HOME/batch/nc-functions
+
+SERVICE_NAME=SolrIndex
+SERVICE_PORT=8207
+PID_PATH_NAME=$MD_HOME/batch/$SERVICE_NAME.pid
+
+
+# Main logic
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status
+        ;;
+    rescheduling)
+        rescheduling
+        ;;
+    restart|reload)
+        stop
+        start
+        ;;
+  *)
+    echo $"Usage: $0 {start|stop|status|rescheduling|restart|reload}"
+    exit 1
+esac
+exit 0
