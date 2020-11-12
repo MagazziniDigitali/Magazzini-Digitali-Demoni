@@ -17,7 +17,7 @@ MD_HOME=<Path in cui è stato installato il programma>
 . $MD_HOME/batch/nc-functions
 
 SERVICE_NAME=GenTicket
-SERVICE_PORT=8205
+SERVICE_PORT=8208
 PID_PATH_NAME=$MD_HOME/batch/$SERVICE_NAME.pid
 
 
