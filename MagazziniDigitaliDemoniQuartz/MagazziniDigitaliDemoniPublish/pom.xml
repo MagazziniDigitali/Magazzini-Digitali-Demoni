@@ -11,14 +11,14 @@
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
   		<artifactId>MagazziniDigitaliDemoniTools</artifactId>
-  		<version>3.0.2</version>
+  		<version>3.0.3</version>
   	</dependency>
   	<dependency>
   		<groupId>
   			it.bncf.magazziniDigitali.businessLogic.publish
   		</groupId>
   		<artifactId>MagazziniDigitaliBusinessLogicPublish</artifactId>
-  		<version>3.0.0</version>
+  		<version>3.0.1</version>
   	</dependency>
   </dependencies>
 	<build>
@@ -117,4 +117,5 @@
 			</build>
 		</profile>
 	</profiles>
+	<version>3.0.1</version>
 </project>

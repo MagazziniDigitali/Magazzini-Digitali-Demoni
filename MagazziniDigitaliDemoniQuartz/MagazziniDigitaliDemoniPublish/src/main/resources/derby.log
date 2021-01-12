@@ -1,0 +1,14 @@
+----------------------------------------------------------------
+Mon Dec 07 15:09:22 CET 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0176-3d89-1363-000003da8ae0 
+on database directory /Users/massi/.droid6/profiles/1607350160897/db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4b85612c 
+Loaded from file:/Users/massi/Sviluppo/bin/droid-binary-6.5-bin/lib/derby-10.13.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.9+7-LTS
+user.dir=/Users/massi/Sviluppo/Sorgenti/Almaviva/Magazzini_Digitali_3.0/MagazziniDigitaliDemoni/MagazziniDigitaliDemoniQuartz/MagazziniDigitaliDemoniPublish/src/main/resources
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.13.6
+derby.system.home=null
+derby.stream.error.file=/Users/massi/.droid6/logs/derby.log
+Database Class Loader started - derby.database.classpath=''

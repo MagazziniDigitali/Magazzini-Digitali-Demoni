@@ -9,12 +9,12 @@
 	</parent>
 	<groupId>it.bncf.magazziniDigitali.demoni.validate</groupId>
 	<artifactId>MagazziniDigitaliDemoniValidate</artifactId>
-	<version>3.0.2</version>
+	<version>3.0.3</version>
 	<dependencies>
 		<dependency>
 			<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
 			<artifactId>MagazziniDigitaliDemoniTools</artifactId>
-			<version>3.0.2</version>
+			<version>3.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>
@@ -23,7 +23,7 @@
 			<artifactId>
   			MagazziniDigitaliBusinessLogicValidate
   		</artifactId>
-			<version>3.0.3</version>
+			<version>3.0.4</version>
 		</dependency>
 	</dependencies>
 	<build>
