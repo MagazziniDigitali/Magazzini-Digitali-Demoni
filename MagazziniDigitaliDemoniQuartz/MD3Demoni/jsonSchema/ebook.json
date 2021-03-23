@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "rights": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "creator": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "name"
+          ]
+        }
+      ]
+    },
+    "identifiers": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "ID": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "ID"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "publisher",
+    "language",
+    "subject",
+    "rights",
+    "date",
+    "creator",
+    "identifiers"
+  ]
+}

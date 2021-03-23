@@ -7,7 +7,7 @@
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.solrIndex</groupId>
   <artifactId>MagazziniDigitaliDemoniSolrIndex</artifactId>
-  <version>3.0.1</version>
+  <version>3.0.2</version>
   <dependencies>
   	<dependency>
   		<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -19,7 +19,7 @@
   			it.bncf.magazziniDigitali.businessLogic.solr
   		</groupId>
   		<artifactId>MagazziniDigitaliBusinessLogicSolr</artifactId>
-  		<version>3.0.1</version>
+  		<version>3.0.2</version>
   	</dependency>
   </dependencies>
 	<build>

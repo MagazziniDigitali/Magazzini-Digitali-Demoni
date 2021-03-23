@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>it.bncf.magazziniDigitali.demoni.validate</groupId>
 	<artifactId>MagazziniDigitaliDemoniValidate</artifactId>
-	<version>3.0.3</version>
+	<version>3.0.4</version>
 	<dependencies>
 		<dependency>
 			<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>
@@ -23,7 +23,7 @@
 			<artifactId>
   			MagazziniDigitaliBusinessLogicValidate
   		</artifactId>
-			<version>3.0.4</version>
+			<version>3.0.5</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -102,13 +102,19 @@
 										<copy todir="${basedir}/../distribution/batch"
 											overwrite="true" flatten="true">
 											<fileset dir="${basedir}/../MD3Demoni/batch"
-												includes="nc-functions-example,Validate.sh-example" />
+												includes="nc-functions-example,Validate.sh-example,tarFile.sh" />
 										</copy>
 										<copy todir="${basedir}/../distribution/MD3Demoni/xsl"
 											overwrite="true" flatten="true">
 											<fileset dir="${basedir}/../MD3Demoni/xsl"
 												includes="**/**" />
 										</copy>
+										<copy todir="${basedir}/../distribution/MD3Demoni/jsonSchema"
+											overwrite="true" flatten="true">
+											<fileset dir="${basedir}/../MD3Demoni/jsonSchema"
+												includes="**/**" />
+										</copy>
+										
 									</target>
 								</configuration>
 								<goals>

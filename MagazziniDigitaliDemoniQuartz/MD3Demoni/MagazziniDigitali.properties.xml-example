@@ -6,6 +6,7 @@
     <!-- URL da contattare per poter fare l'autenticazione del Software -->
     <entry key="software.URLAuthentication">http://<Url Server Services>:<Porta Server Services>/MagazziniDigitaliServices/services/AuthenticationSoftwarePort?wsdl</entry>
 
+    <entry key="file.tar"><Path Files Configurazione>/batch/tarFile.sh</entry>
     <!-- Configurazione Software Demoni -->
 
     <entry key="software.CodaGeoReplica.login">DQ_CodaGeoReplica_MD</entry>
@@ -46,7 +47,7 @@
     <entry key="software.Validate.password">m@9@221n1</entry>
     <entry key="software.Validate.scheduling">true</entry>
     <entry key="software.Validate.quartz">quartzValidate.properties</entry>
-    <entry key="demoni.Validate.json.schema"><Path Files Configurazione>/xsl/Mets2MD.xsl</entry>
+    <entry key="demoni.Validate.json.schema"><Path Files Configurazione>/jsonSchema/ebook.json</entry>
 
     <entry key="software.Publish.login">DQ_Publish_MD</entry>
     <entry key="software.Publish.password">m@9@221n1</entry>
