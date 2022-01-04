@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 		<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version><!-- 3.0.0 -->
 	</parent>
 	<groupId>it.bncf.magazziniDigitali.demoni.validate</groupId>
 	<artifactId>MagazziniDigitaliDemoniValidate</artifactId>

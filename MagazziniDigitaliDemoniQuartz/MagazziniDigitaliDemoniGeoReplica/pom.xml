@@ -3,7 +3,7 @@
   <parent>
     <groupId>it.bncf.magazziniDigitali.demoni</groupId>
     <artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-    <version>3.0.0</version>
+		<version>3.0.1</version><!-- 3.0.0 -->
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.geopReplica</groupId>
   <artifactId>MagazziniDigitaliDemoniGeoReplica</artifactId>
@@ -14,13 +14,9 @@
   		<version>3.0.3</version>
   	</dependency>
   	<dependency>
-  		<groupId>
-  			it.bncf.magazziniDigitali.businessLogic.geoReplica
-  		</groupId>
-  		<artifactId>
-  			MagazziniDigitaliBusinessLogicGeoReplica
-  		</artifactId>
-  		<version>3.0.1</version>
+  		<groupId>it.bncf.magazziniDigitali.businessLogic.geoReplica</groupId>
+  		<artifactId>MagazziniDigitaliBusinessLogicGeoReplica</artifactId>
+		<version>3.0.2</version><!-- 3.0.1 -->
   	</dependency>
   </dependencies>
 	<build>

@@ -5,17 +5,15 @@
 	<parent>
 		<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 		<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version><!-- 3.0.0 -->
 	</parent>
 	<groupId>it.bncf.magazziniDigitali.demoni.geoReplica</groupId>
 	<artifactId>MagazziniDigitaliDemoniCodaGeoReplica</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>
-  			it.bncf.magazziniDigitali.businessLogic.coda
-  		</groupId>
+			<groupId>it.bncf.magazziniDigitali.businessLogic.coda</groupId>
 			<artifactId>MagazziniDigitaliBusinessLogicCoda</artifactId>
-			<version>3.0.1</version>
+			<version>3.0.2</version><!-- 3.0.1 -->
 		</dependency>
 		<dependency>
 			<groupId>it.bncf.magazziniDigitali.demoni.tools</groupId>

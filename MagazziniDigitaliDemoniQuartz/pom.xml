@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.bncf.magazziniDigitali.demoni</groupId>
 	<artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version><!-- 3.0.0 -->
 	<description>Progetto per la gestione dei Demoni per i Magazzino Digitale basato sulla tecnologia Quartz per la Schedulazione delle attività</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,6 +35,7 @@
 		<module>MagazziniDigitaliDemoniPublish</module>
 		<module>MagazziniDigitaliDemoniSolrIndex</module>
 	</modules>
+<!-- 	
 	<repositories>
 		<repository>
 			<id>bncf</id>
@@ -74,4 +75,5 @@
 			<url>http://maven.bncf.firenze.sbn.it/artifactory/libs-release-local</url>
 		</repository>
 	</distributionManagement>
+ -->	
 </project>

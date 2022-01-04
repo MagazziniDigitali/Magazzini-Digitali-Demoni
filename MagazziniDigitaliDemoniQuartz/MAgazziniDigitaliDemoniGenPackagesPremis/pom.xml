@@ -3,7 +3,7 @@
   <parent>
     <groupId>it.bncf.magazziniDigitali.demoni</groupId>
     <artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-    <version>3.0.0</version>
+		<version>3.0.1</version><!-- 3.0.0 -->
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.genPackagesPremis</groupId>
   <artifactId>MagazziniDigitaliDemoniGenPackagesPremis</artifactId>
@@ -14,13 +14,9 @@
   		<version>3.0.3</version>
   	</dependency>
   	<dependency>
-  		<groupId>
-  			it.bncf.magazziniDigitali.businessLogic.packagesPremis
-  		</groupId>
-  		<artifactId>
-  			MagazziniDigitaliBusinessLogicPackagesPremis
-  		</artifactId>
-  		<version>3.0.2</version>
+  		<groupId>it.bncf.magazziniDigitali.businessLogic.packagesPremis</groupId>
+  		<artifactId>MagazziniDigitaliBusinessLogicPackagesPremis</artifactId>
+  		<version>3.0.3</version><!-- 3.0.2 -->
   	</dependency>
   </dependencies>
 	<build>

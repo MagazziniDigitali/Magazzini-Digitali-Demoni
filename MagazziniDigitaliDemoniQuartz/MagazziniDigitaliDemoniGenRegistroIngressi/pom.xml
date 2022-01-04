@@ -3,7 +3,7 @@
   <parent>
     <groupId>it.bncf.magazziniDigitali.demoni</groupId>
     <artifactId>MagazziniDigitaliDemoniQuartz</artifactId>
-    <version>3.0.0</version>
+		<version>3.0.1</version><!-- 3.0.0 -->
   </parent>
   <groupId>it.bncf.magazziniDigitali.demoni.genRegistroIngressi</groupId>
   <artifactId>MagazziniDigitaliDemoniGenRegistroIngressi</artifactId>
@@ -15,13 +15,9 @@
   		<version>3.0.3</version>
   	</dependency>
   	<dependency>
-  		<groupId>
-  			it.bncf.magazziniDigitali.businessLogic.registroIngressi
-  		</groupId>
-  		<artifactId>
-  			MagazziniDigitaliBusinessLogicRegistroIngressi
-  		</artifactId>
-  		<version>3.0.2</version>
+  		<groupId>it.bncf.magazziniDigitali.businessLogic.registroIngressi</groupId>
+  		<artifactId>MagazziniDigitaliBusinessLogicRegistroIngressi</artifactId>
+		<version>3.0.3</version><!-- 3.0.2 -->
   	</dependency>
   </dependencies>
 	<build>

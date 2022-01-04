@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.bncf.magazziniDigitali.demoni.clientServices</groupId>
 	<artifactId>MagazziniDigitaliDemoniClientServices</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version><!-- 3.0.0 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -37,6 +37,7 @@
 			<version>4.5.3</version>
 		</dependency>
 	</dependencies>
+<!-- 	
 	<repositories>
 		<repository>
 			<id>bncf</id>
@@ -76,6 +77,7 @@
 			<url>http://maven.bncf.firenze.sbn.it/artifactory/libs-release-local</url>
 		</repository>
 	</distributionManagement>
+	 -->
 	<build>
 		<resources>
 			<resource>
